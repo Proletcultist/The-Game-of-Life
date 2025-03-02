@@ -1,11 +1,13 @@
-main: ./bin/main.img
-sample: ./bin/sample.img
+BIN_DIR = ./bin
+SRC_DIR = ./src
 
-./bin/main.img: ./src/main.asm ./src/handlers.asm ./src/IVT.asm ./src/matrixDriver.asm
-	cocas -o ./bin/main.img ./src/main.asm ./src/handlers.asm ./src/IVT.asm ./src/matrixDriver.asm
+all: $(BIN_DIR)/main.img $(BIN_DIR)/sample.img
 
-./bin/sample.img: ./src/sample.asm ./src/handlers.asm ./src/IVT.asm ./src/matrixDriver.asm
-	cocas -o ./bin/sample.img ./src/handlers.asm ./src/IVT.asm ./src/sample.asm ./src/matrixDriver.asm
+$(BIN_DIR)/main.img: $(SRC_DIR)/main.asm $(SRC_DIR)/handlers.asm $(SRC_DIR)/IVT.asm $(SRC_DIR)/matrixDriver.asm | $(BIN_DIR)
+	cocas -o $@ $^
 
-clear:
-	rm ./bin/*
+$(BIN_DIR)/sample.img: $(SRC_DIR)/sample.asm $(SRC_DIR)/handlers.asm $(SRC_DIR)/IVT.asm $(SRC_DIR)/matrixDriver.asm | $(BIN_DIR)
+	cocas -o $@ $^
+
+clean:
+	rm -f $(BIN_DIR)/*
