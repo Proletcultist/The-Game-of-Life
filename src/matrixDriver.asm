@@ -35,7 +35,6 @@ setTo1>
 # now r2 - matrix address
 
 	ldi r3, mtx
-	ldw r3, r3
 	ldw r2, r3, r4
 
 	ldi r1, offsetmasks
@@ -70,7 +69,6 @@ setTo0>
 # now r2 - matrix address
 
 	ldi r3, mtx
-	ldw r3, r3
 	ldw r2, r3, r4
 
 	ldi r1, offsetmasks
@@ -91,7 +89,6 @@ setRectTo1>
 
 startGame>
 	ldi r0, state
-	ldw r0, r0
 	ldw r0, r1
 
 	ldi r2, 4096
@@ -103,7 +100,6 @@ startGame>
 
 pauseGame>
 	ldi r0, state
-	ldw r0, r0
 	ldw r0, r1
 
 	ldi r2, 61440
@@ -117,7 +113,6 @@ pauseGame>
 # r0 - die1, r1 - die2, r2 - resp
 setRules>
 	ldi r3, state
-	ldw r3, r3
 	ldw r3, r4
 
 	ldi r5, 0b1111000000000000
