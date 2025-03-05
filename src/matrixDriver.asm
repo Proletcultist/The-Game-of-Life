@@ -113,13 +113,22 @@ setRectTo1>
 			not r2
 		fi
 	else
-		if
-			cmp r2, 16
-		is lo
+		ldi r4, offsetmasks
+		sub r2, 31
+		neg r2		
+		shl r2
+		ldw r4, r2, r2
+		dec r2
+		not r2
 
-		else
-
-		fi
+		sub r0, 32
+		neg r0
+		shl r0
+		ldw r4, r0, r0
+		dec r0
+				
+		and r0, r2
+		ldi r0, 0
 	fi	
 
 
