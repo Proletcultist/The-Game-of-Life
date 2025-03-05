@@ -2,7 +2,9 @@
 rsect main
 
 setTo1: ext
+setTo0: ext
 startGame: ext
+pauseGame: ext
 setRules: ext
 
 # Draws glider and run game with standart rules
@@ -14,6 +16,14 @@ main>
 	ldi r1, 0
 
 	jsr setTo1
+
+# Testing setTo0
+	
+	ldi r0, 5
+	ldi r1, 0
+
+	jsr setTo0
+# End of test
 
 	ldi r0, 6
 	ldi r1, 1
