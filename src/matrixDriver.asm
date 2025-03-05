@@ -6,11 +6,9 @@ state:
 # Section with matrix driver functions
 rsect matrixDriver
 
-mulUns: ext
-
 rowscoords: dc 0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80, 84, 88, 92, 96, 100, 104, 108, 112, 116, 120, 124
 
-offsetmasks: dc 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768
+offsetmasks: dc 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 0
 
 # set_to_1(x,y) x in r0, y in r1
 setTo1>
@@ -84,7 +82,72 @@ setTo0>
 
 # r0=x1, r1=y1, r2=x2, r3=y2
 setRectTo1>
-	
+	if 
+		cmp r0, 16
+	is lo
+		sub r0, 16
+		neg r0
+		shl r0
+		ldi r4, offsetmasks
+		ldw r4, r0, r0
+		dec r0
+
+		if
+			cmp r2, 16
+		is lo
+			sub r2, 15
+			neg r2
+			shl r2
+			ldw r4, r2, r2
+			dec r2
+			not r2
+
+			and r2, r0
+			ldi r2, 0	
+		else
+			sub r2, 31
+			neg r2		
+			shl r2
+			ldw r4, r2, r2
+			dec r2
+			not r2
+		fi
+	else
+		if
+			cmp r2, 16
+		is lo
+
+		else
+
+		fi
+	fi	
+
+
+	# in r0 first word mask, in r2 second word mask
+
+	ldi r4, rowscoords
+	shl r1
+	ldw r4, r1, r1
+
+	shl r3
+	ldw r4, r3, r3
+
+	ldi r4, mtx
+	while 
+		cmp r3, r1
+	stays hs
+		ldw r4, r1, r5
+		or r0, r5
+		stw r4, r1, r5
+		add r1, 2
+
+		ldw r4, r1, r5
+		or r2, r5
+		stw r4, r1, r5
+		add r1, 2
+	wend
+
+	rts
 	
 
 startGame>
