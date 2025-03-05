@@ -1,14 +1,16 @@
+asect 0xff80
+mtx:
+asect 0xff7e
+state:
+
 # Section with matrix driver functions
 rsect matrixDriver
 
 mulUns: ext
 
-mtx: dc 0xff80
-state: dc 0xff7e
-
 rowscoords: dc 0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80, 84, 88, 92, 96, 100, 104, 108, 112, 116, 120, 124
 
-offsetmasks: dc 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536
+offsetmasks: dc 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768
 
 # set_to_1(x,y) x in r0, y in r1
 setTo1>
