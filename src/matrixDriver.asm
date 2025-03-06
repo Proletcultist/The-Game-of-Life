@@ -70,9 +70,9 @@ setTo0>
 	ldw r2, r3, r4
 
 	ldi r1, offsetmasks
-	not r1
 	shl r0
 	ldw r1, r0, r1
+	not r1
 
 	and r1, r4
 

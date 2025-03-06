@@ -6,6 +6,7 @@ setTo0: ext
 startGame: ext
 pauseGame: ext
 setRules: ext
+setRectTo1: ext
 
 # Draws glider and run game with standart rules
 main>
@@ -16,6 +17,14 @@ main>
 	ldi r1, 0
 
 	jsr setTo1
+# Testing setRectTo1
+
+	ldi r0, 0
+	ldi r1, 0
+	ldi r2, 31
+	ldi r3, 0
+
+	jsr setRectTo1
 
 # Testing setTo0
 	
