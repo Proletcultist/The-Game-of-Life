@@ -7,6 +7,7 @@ startGame: ext
 pauseGame: ext
 setRules: ext
 setRectTo1: ext
+clear: ext
 
 # Draws glider and run game with standart rules
 main>
@@ -57,6 +58,8 @@ main>
 	ldi r0, 2
 	ldi r1, 3
 	ldi r2, 3
+	
+	jsr clear
 
 	jsr setRules
 
