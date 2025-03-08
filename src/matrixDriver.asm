@@ -212,4 +212,14 @@ setRules>
 
 	rts
 
+clear>
+	ldi r0, state
+	ldw r0, r1
+	ldi r2, 0b0010000000000000
+	or r2, r1
+	
+	stw r0, r1 
+
+	rts
+
 end
