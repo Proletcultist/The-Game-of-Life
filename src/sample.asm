@@ -9,7 +9,6 @@ setRules: ext
 setRectTo1: ext
 clear: ext
 
-# Draws glider and run game with standart rules
 main>
 	ldi r0, 0xff00
 	stsp r0
@@ -59,7 +58,6 @@ main>
 	ldi r1, 3
 	ldi r2, 3
 	
-	jsr clear
 
 	jsr setRules
 
