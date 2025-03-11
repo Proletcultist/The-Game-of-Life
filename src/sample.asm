@@ -13,6 +13,8 @@ main>
 	ldi r0, 0xff00
 	stsp r0
 
+	ei
+
 	ldi r0, 5
 	ldi r1, 0
 
