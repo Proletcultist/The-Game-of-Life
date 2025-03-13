@@ -5,11 +5,11 @@ default_handler>
     halt
 
 sample_1_int>
-	ldi r0, 69
-	rti
+	ldi r1, 69
+	halt
 
 sample_2_int>
-	ldi r0, 69
+	ldi r6, 7
 	halt
 
 end
