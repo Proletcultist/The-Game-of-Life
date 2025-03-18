@@ -15,51 +15,22 @@ main>
 
 	ei
 
-	ldi r0, 5
+	ldi r0, 3
 	ldi r1, 0
 
-	jsr setTo1
-# Testing setRectTo1
-
-	ldi r0, 0
-	ldi r1, 0
-	ldi r2, 31
-	ldi r3, 0
-
-	jsr setRectTo1
-
-# Testing setTo0
-	
-	ldi r0, 5
-	ldi r1, 0
-
-	jsr setTo0
-# End of test
-
-	ldi r0, 6
-	ldi r1, 1
-
-	jsr setTo1
-	
-	ldi r0, 6
-	ldi r1, 2
-
-	jsr setTo1
-
-	ldi r0, 5
-	ldi r1, 2
-
-	jsr setTo1
+	jsr setTo1	
 
 	ldi r0, 4
-	ldi r1, 2
+	ldi r1, 1
 
 	jsr setTo1
 
 	ldi r0, 2
-	ldi r1, 3
-	ldi r2, 3
-	
+	ldi r1, 2
+	ldi r2, 4
+	ldi r3, 2
+
+	jsr setRectTo1
 
 	jsr setRules
 
