@@ -1,8 +1,21 @@
 # Main program section
 rsect main
 
-main>
+sample_1_int: ext
 
-	halt
+main>
+	ldi r0, 0xff00
+	stsp r0
+
+	ldi r6, sample_1_int
+	
+	ei
+
+	ldi r0, 1
+	ldi r0, 5
+
+	w:
+	wait
+	br w
 
 end
