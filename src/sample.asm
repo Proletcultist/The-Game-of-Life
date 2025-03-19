@@ -5,7 +5,8 @@ setTo1: ext
 setTo0: ext
 startGame: ext
 pauseGame: ext
-setRules: ext
+setSurv: ext
+setBorn: ext
 setRectTo1: ext
 clear: ext
 
@@ -14,6 +15,7 @@ main>
 	stsp r0
 
 	ei
+
 
 	ldi r0, 3
 	ldi r1, 0
@@ -32,7 +34,14 @@ main>
 
 	jsr setRectTo1
 
-	jsr setRules
+	ldi r0, 0b0000000000001100
+
+	jsr setSurv
+
+	ldi r0, 0b0000000000001000
+
+	jsr setBorn
+	
 
 	jsr startGame	
 

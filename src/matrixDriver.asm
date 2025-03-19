@@ -1,7 +1,9 @@
 asect 0xff80
 mtx:
 asect 0xff7e
-state:
+state1:
+asect 0xff7c
+state2:
 
 # Section with matrix driver functions
 rsect matrixDriver
@@ -160,10 +162,10 @@ setRectTo1>
 	
 
 startGame>
-	ldi r0, state
+	ldi r0, state2
 	ldw r0, r1
 
-	ldi r2, 4096
+	ldi r2, 0b0000001000000000
 	or r2, r1
 
 	stw r0, r1
@@ -171,10 +173,10 @@ startGame>
 	rts
 
 pauseGame>
-	ldi r0, state
+	ldi r0, state2
 	ldw r0, r1
 
-	ldi r2, 61440
+	ldi r2, 0b1111110111111111
 
 	and r2, r1
 
@@ -182,40 +184,36 @@ pauseGame>
 
 	rts
 
-# r0 - die1, r1 - die2, r2 - resp
-setRules>
-	ldi r3, state
-	ldw r3, r4
+# r0 - surv, all bits, except 0-8, should be zero!!
+setSurv>
+	ldi r1, state1
+	ldw r1, r2
 
-	ldi r5, 0b1111000000000000
-	and r5, r4
+	ldi r3, 0b1111111000000000
+	and r3, r2
+	or r0, r2
 
-	shl r1	
-	shl r1
-	shl r1
-	shl r1
+	stw r1, r2
+	
+	rts
 
-	shl r2
-	shl r2
-	shl r2
-	shl r2
-	shl r2
-	shl r2
-	shl r2
-	shl r2
+# r0 - born, all bits, except 0-8, should be zero!!
+setBorn>
+	ldi r1, state2
+	ldw r1, r2
 
-	add r0, r1
-	add r1, r2
-	add r2, r4
+	ldi r3, 0b1111111000000000
+	and r3, r2
+	or r0, r2
 
-	stw r3, r4
-
+	stw r1, r2
+	
 	rts
 
 clear>
-	ldi r0, state
+	ldi r0, state2
 	ldw r0, r1
-	ldi r2, 0b0010000000000000
+	ldi r2, 0b0000010000000000
 	or r2, r1
 	
 	stw r0, r1 
