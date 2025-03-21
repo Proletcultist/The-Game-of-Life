@@ -160,6 +160,84 @@ setRectTo1>
 
 	rts
 	
+# r0=x1, r1=y1, r2=x2, r3=y2
+setRectTo0>
+	if 
+		cmp r0, 16
+	is lo
+		sub r0, 16
+		neg r0
+		shl r0
+		ldi r4, offsetmasks
+		ldw r4, r0, r0
+		dec r0
+
+		if
+			cmp r2, 16
+		is lo
+			sub r2, 15
+			neg r2
+			shl r2
+			ldw r4, r2, r2
+			dec r2
+			not r2
+
+			and r2, r0
+			ldi r2, 0	
+		else
+			sub r2, 31
+			neg r2		
+			shl r2
+			ldw r4, r2, r2
+			dec r2
+			not r2
+		fi
+	else
+		ldi r4, offsetmasks
+		sub r2, 31
+		neg r2		
+		shl r2
+		ldw r4, r2, r2
+		dec r2
+		not r2
+
+		sub r0, 32
+		neg r0
+		shl r0
+		ldw r4, r0, r0
+		dec r0
+				
+		and r0, r2
+		ldi r0, 0
+	fi	
+
+	not r0
+	not r2
+	# in r0 first word mask, in r2 second word mask
+
+	ldi r4, rowscoords
+	shl r1
+	ldw r4, r1, r1
+
+	shl r3
+	ldw r4, r3, r3
+
+	ldi r4, mtx
+	while 
+		cmp r3, r1
+	stays hs
+		ldw r4, r1, r5
+		and r0, r5
+		stw r4, r1, r5
+		add r1, 2
+
+		ldw r4, r1, r5
+		and r2, r5
+		stw r4, r1, r5
+		add r1, 2
+	wend
+
+	rts
 
 startGame>
 	ldi r0, state2
