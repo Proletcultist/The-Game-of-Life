@@ -298,4 +298,49 @@ clear>
 
 	rts
 
+speedDown>
+	ldi r0, state2
+	ldw r0, r1
+	ldi r2, 0b0000100000000000
+	add r2, r1 			# Assume, what there is no significant data after 12th bit
+	
+	stw r0, r1	
+
+	rts
+speedUp>
+	ldi r0, state2
+	ldw r0, r1
+	ldi r2, 0b1111100000000000
+	add r2, r1 			# Assume, what there is no significant data after 12th bit
+	
+	stw r0, r1	
+
+	rts
+
+# Speed in r0
+setSpeed>
+	ldi r1, state2
+	ldw r1, r2
+
+	ldi r3, 0b1110011111111111
+	and r3, r2
+
+	shl r0	
+	shl r0	
+	shl r0	
+	shl r0	
+	shl r0	
+	shl r0	
+	shl r0	
+	shl r0	
+	shl r0	
+	shl r0	
+	shl r0	
+
+	or r0, r2
+
+	stw r1, r2
+
+	rts
+
 end
