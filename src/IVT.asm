@@ -1,10 +1,10 @@
 asect 0
-main: ext               # Declare labels
+start: ext
 default_handler: ext    # as external
 sample_1_int: ext
 sample_2_int: ext
 
-dc main, 0              # Startup/Reset vector
+dc start, 0              # Startup/Reset vector
 dc default_handler, 0   # Unaligned SP
 dc default_handler, 0   # Unaligned PC
 dc default_handler, 0   # Invalid instruction
