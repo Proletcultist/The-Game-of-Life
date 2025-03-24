@@ -4,6 +4,8 @@ asect 0xff7e
 state1:
 asect 0xff7c
 state2:
+asect 0xff76
+stepaddres:
 
 # Section with matrix driver functions
 rsect matrixDriver
@@ -340,6 +342,12 @@ setSpeed>
 	or r0, r2
 
 	stw r1, r2
+
+	rts
+
+stepOnce>
+	ldi r0, stepaddres
+	stb r0, r0
 
 	rts
 
