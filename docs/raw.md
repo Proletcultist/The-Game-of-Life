@@ -1,3 +1,25 @@
+# General design
+# Hardware
+## Memory mapped I/O
+## Interrupt Arbiter
+## Interrupt bus
+## Matrix controller
+## UART controller
+# Software
+## Memory layout
+## Interrupt Vector Table (IVT)
+## Start section
+## Matrix Driver
+## Interrupt handlers
+## Main section
+## Commands list
+## Commands parsing
+
+Перевести и распределить по разделам
+|
+V
+
+
 # Память
 
 - Адреса 0xff00-0xffff - адреса для периферийных устройств
