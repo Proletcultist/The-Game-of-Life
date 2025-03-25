@@ -84,6 +84,19 @@ Circuit in the west side is counter, simple circuit which counts amount of its' 
 ![](./pictures/counter.png)
 
 ### Game processor row
+
+![](./pictures/gameProcessorRow.png)
+
+This circuit is just 32 cells connectend with each other in one row. This circuit have 3 inputs for rows:
+1. Row **above** this
+2. Row **below** this
+3. **This** row
+All of this inputs is **current** state of this rows.
+Also, there is 2 inputs for rules, mentioned before: **surv** and **born**.
+
+All of cells' 8 **neighbour** inputs connected to appropriate wires with their neighbours statuses (except leftmost and rightmost cells, which don't have neighbours on the left and on the right respectively).
+
+All of calculated **new** states of cells goes in single 32 bit wide wire, which goes to the only one output of game processor row - **new state of this row**.
 ### Game processor
 ### Speed controller
 ### Status register
