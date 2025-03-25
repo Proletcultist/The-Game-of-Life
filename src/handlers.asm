@@ -4,8 +4,7 @@ uart:
 asect 0xfee1
 buf: ds 31
 
-# Exception handlers section
-rsect exc_handlers
+rsect handlers
 
 parse: ext
 
