@@ -17,16 +17,72 @@ The core idea behind the division of responsibilities between CdM-16 and periphe
 Matrix controller consist of two main parts:
 - Matrix buffer - main sequential unit, which stores current game field state and can be modified by processor or by game processor.
 - Game processor - main combinatory unit, which calculates next field state based on current and on rules.
-- Other auxiliary devices, wich will be described later.
+Other auxiliary devices, will be described later.
 ### Matrix buffer row
 
 ![](./pictures/bufferRow.png)
-Here we have 32-bit register, holding state of one row of field and bunch of infrasctructure for modifying it and for reading its' data. 
 
-Act of writing to this register can be triggered by rising edge of clock (so it will be synchronized with processor) or by rising edge of cc (counter clock) either (so it will be synchronized with game processor).
+Here we have 32-bit register, holding state of one row of field and infrasctructure for modifying it and for reading its' data. 
+
+This register is enabled only if this row is **selected** as a distination of writing act of processor or if the game is **running**. Reasons of it is obvious, we don't need to change anything when the game paused and if processor isn't writing to this row.
+
+Act of writing to this register can be triggered by rising edge of **clock** (so it will be synchronized with processor) or by rising edge of **cc** (counter clock) either (so it will be synchronized with game processor).
+
+Also, because two sources of new state of this row (processor and game processor) changes different amount of bits in state at time (processor changes only first or second 16 bits of state due to size of data bus, game processor can change all 32 bits at time) there is two inputs in this circuit:
+- **Narrow in** - input from data bus of processor. This source is closed (by controlled buffer) when it's not needed (when there is no writing to this row from processor) same as **self** - current state of row, which needed for replacing one half of it while keeping another half unchanged (depends on **block** input, 0 - most significant bits, 1 - least significant bits).
+- **Wide in** - input from game processor (new state of this row, calculated by game processor). This source goes straight to the multiplexer.
+Which source of new state to use selects multiplexe in the west of register. It's disabled, when register is disabled, and when it's enabled, it select source by watching **sel** input, if **sel** is high, it's mean, that we need to take new state from processor, from **narrow in** combined with current state, when **sel** is low, we need to take new state from game processor, from **wide in**.
+
+Respectively, in the east side of circuit we have two outputs:
+- **Narrow out** - output to data bus of processor. Row will pass its' first or second half on this buss (depends on **block** again) if processor reads data from this row, otherwise it won't pass anything.
+- **Wid out** - output to game processor. Row always pass its' current state to let game processor calculate its' new state if game is running.
+
+Also, in the west side of circuit we can see, that some of inputs goes straight to output, named same as an input. This needed to pass some siggnals through all of rows, then they stay one above another (we will see it in next section).
+
+This is how this circuit looks in other circuits:
+
+![](./pictures/bufferRowAppearence.png)
+
+Here we have all of described inputs and outputs labeled.
 ### Matrix buffer
+
+![](./pictures/buffer.png)
+
+Here we have 32 **matrix buffer rows**, connected with each other in one big block - matrix buffer. All **narrow ins** connected to one narrow in input in the south of circuit, which connected to data bus. Also, all **narrow outs** connected to one narrow out output, connected to data bus.
+
+Where is decoder for selecting appropriate row by addres and demultiplexer to pass clock signal only to the row, which selected.
+
+All of wide inputs connected to 32 separate 32 bit inputs and all of wide outputs connected to 32 separate 32 bit outputs.
+
+Here is matrix buffer appearence:
+
+![](./pictures/bufferAppearence.png)
+
 ### Cell
+
+![](./pictures/cell.png)
+
+Cell is a single calculator, which calculates new state of single cell, based on its' neighbours (actually on amount of alive neighbours), current status of cell and rules.
+
+This is done by two multiplexers, selecting if cell should survive or should it become alive, and CNF, which represents following truth table:
+
+| surv | born | state | new |
+| ---- | ---- | ----- | --- |
+| 0    | 0    | 0     | 0   |
+| 0    | 0    | 1     | 0   |
+| 0    | 1    | 0     | 1   |
+| 0    | 1    | 1     | 1   |
+| 1    | 0    | 0     | 0   |
+| 1    | 0    | 1     | 1   |
+| 1    | 1    | 0     | 1   |
+| 1    | 1    | 1     | 1   |
+
 #### Counter
+
+Circuit in the west side is counter, simple circuit which counts amount of its' high inputs:
+
+![](./pictures/counter.png)
+
 ### Game processor row
 ### Game processor
 ### Speed controller
@@ -69,8 +125,3 @@ V
 	- 9 бит play
 	- 10 бит reset
 	- 11-12 биты speed, 0 самая быстра, 3 - самая медленная
-
-# Прерывания
-
-- Произошло подключение - прерывание, печатаем приветственное сообщение и приглашение
-- Пришли данные - прерывание, считываем одну строчку данных, парсим её, выполняем команду/печатаем ошибку. Читаем информацию о СТАТУСЕ UART'a из какого то отдельного регистра статуса для UART'a, если там информация о том, что данных больше нет - печатаем приглашение в терминал, встаём в wait. Если есть ещё строчки на обработку - запускаем обработчик прерывания снова.
