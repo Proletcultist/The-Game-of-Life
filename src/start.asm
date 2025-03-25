@@ -5,7 +5,7 @@ main: ext
 rsect start
 
 start>
-	ldi r0, 0xff00
+	ldi r0, 0xfee1
 	stsp r0
 
 	jsr main
