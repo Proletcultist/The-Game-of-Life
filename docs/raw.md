@@ -11,7 +11,31 @@ The core idea behind the division of responsibilities between CdM-16 and periphe
 # Hardware
 ## Memory mapped I/O
 ## Interrupt Arbiter
+
+The arbiter has four states it can be in:
+1. **Zero** - the device does not require interrupts, or it does, but at the moment another device has not finished transmitting its interrupt request.
+In this state:
+If the device does not require an interrupt, then the IRQ and IAck pass through the arbiter from east to west and from west to east (it should be noted that if the processor is in the **WAITING** status, its raising of IAck is not considered as a response to the interrupt request, since being in this state, having received an interrupt request, the processor will only return to the **RUNNING** status, but will not process the request, the request will be processed after the transition to the **RUNNING** status)
+If the device requires an interrupt, but the other device has not finished transmitting its request, then the IAck output in the east cannot be raised again, but can be lowered (its high level indicates that the other device is transmitting its request)
+
+The transition from this state to the first is carried out provided that the device requires an interrupt and no other device is transmitting an interrupt request.
+2. The **first** is sending an interrupt request from the device.
+In this state:
+The IRQ to the west and IAck to the east are blocked, while the arbiter holds the IRQ output to the west at a high level, signaling the processor that an interrupt is required
+
+The transition from this state to the second is carried out provided that the processor has responded to the request by raising IAck (which means that the processor state allows the interrupt to be processed)
+3. **Second** - transfer of the interrupt vector to the processor
+In this state:
+The arbiter still holds the IRQ at a high level, since its lowering will lead to the termination of the interrupt request transfer process (unlike CdM-8, in which a fall in IRQ will cause a fall in IAck, which will trigger the interrupt vector latch in the processor, CdM-16 latches the interrupt vector on the falling edge of the clock, provided that there is an interrupt request and the necessary conditions inside the processor). In this case, the interrupt vector from the device is fed to the interrupt vector bus connected to the processor. Also, the raised IAck is transmitted to the device to notify it that the processor has responded to its request.
+
+The transition from this state back to zero and the completion of interrupt processing occurs on the falling edge of the clock, since it is at this moment that the processor latches the interrupt vector and the process of transmitting the request can be considered complete.
 ## Interrupt bus
+
+![](./pictures/intBus.png)
+
+Interrupt bus has two arbiters:
+- The first arbiter for outputting a greeting message. It has a higher priority and causes an interrupt when a remote terminal connects, sending a **con** signal.
+- The second arbiter for processing commands. It has a lower priority and causes an interrupt when a command arrives in the UART buffer, sending a **dt** signal. In order to be able to process several commands that arrive one after another or one while the second is being read, a special address is used that sends a signal that the command reading has been completed.
 ## Matrix controller
 
 Matrix controller consist of two main parts:
@@ -102,6 +126,12 @@ All of calculated **new** states of cells goes in single 32 bit wide wire, which
 ### Status register
 ### One iteration trigger
 ## UART controller
+
+![](./pictures/uartController.png)
+
+UART controller contains UART and I/O implementation.
+- When the processor accesses an address allocated in memory, it writes a character to the UARTa buffer via the data bus or retrieves it from there via the data bus depending on the rd/wr signal.
+- UART raises the **dt** signal if a character arrives in the buffer, and the **con** signal if a remote terminal is connected to the UART.
 # Software
 ## Memory layout
 
@@ -120,6 +150,24 @@ All of calculated **new** states of cells goes in single 32 bit wide wire, which
 ## Main section
 ## Commands list
 ## Commands parsing
+
+Functions:
+1. **skipSpaces**
+ - Argument: r0 - pointer to buffer's symbol
+ - Skips all spaces from current symbol
+2. **strncmp**
+ - Arguments: r0 - pointer to buffer's symbol, r1 - pointer to command's symbol, r4 - number of symbols
+ - Compares the first n symbols from the current symbol with a command of size n
+3. **readUInt**
+ - Arguments: r0 - pointer to buffer's symbol
+ - Gets a number from the buffer from the current symbol
+
+General algorithm for parsing:
+- Call the skipSpaces function
+- Compare with the command using strncmp
+- Call skipSpaces again
+- Then call skipSpaces and readUInt as needed
+
 # User guide
 
 
