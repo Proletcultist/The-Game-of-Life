@@ -4,7 +4,7 @@ SRC_DIR = ./src
 TESTS_BIN_DIR = ./bin/Tests
 TESTS_SRC_DIR = ./src/Tests
 
-CORE_SOURCES = handlers.asm IVT.asm matrixDriver.asm parser.asm parserUtils.asm strLiterals.asm 
+CORE_SOURCES = handlers.asm IVT.asm matrixDriver.asm parser.asm parserUtils.asm strLiterals.asm start.asm 
 TESTS_SOURCES = $(notdir $(wildcard $(TESTS_SRC_DIR)/*))
 
 main: $(BIN_DIR)/main.img
