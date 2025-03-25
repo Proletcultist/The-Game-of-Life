@@ -4,17 +4,17 @@ SRC_DIR = ./src
 TESTS_BIN_DIR = ./bin/Tests
 TESTS_SRC_DIR = ./src/Tests
 
-CORE_SOURCES = handlers.asm IVT.asm matrixDriver.asm
+CORE_SOURCES = start.asm handlers.asm IVT.asm matrixDriver.asm
 TESTS_SOURCES = $(notdir $(wildcard $(TESTS_SRC_DIR)/*))
 
 main: $(BIN_DIR)/main.img
 tests: $(addprefix $(TESTS_BIN_DIR)/, $(patsubst %.asm, %.img, $(TESTS_SOURCES)))
 all: main tests
 
-$(TESTS_BIN_DIR)/%.img: $(SRC_DIR)/start.asm $(addprefix $(SRC_DIR)/, $(CORE_SOURCES)) $(TESTS_SRC_DIR)/%.asm | $(TESTS_BIN_DIR)
+$(TESTS_BIN_DIR)/%.img: $(addprefix $(SRC_DIR)/, $(CORE_SOURCES)) $(TESTS_SRC_DIR)/%.asm | $(TESTS_BIN_DIR)
 	cocas -o $@ $^	
 
-$(BIN_DIR)/main.img: $(SRC_DIR)/start.asm $(SRC_DIR)/main.asm $(addprefix $(SRC_DIR)/, $(CORE_SOURCES)) | $(BIN_DIR)
+$(BIN_DIR)/main.img: $(SRC_DIR)/main.asm $(addprefix $(SRC_DIR)/, $(CORE_SOURCES)) | $(BIN_DIR)
 	cocas -o $@ $^
 
 $(BIN_DIR):
