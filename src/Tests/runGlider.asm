@@ -2,46 +2,36 @@
 
 rsect main
 
-setTo1: ext
-setTo0: ext
-startGame: ext
-pauseGame: ext
-setSurv: ext
-setBorn: ext
-setRectTo1: ext
-speedUp: ext
-speedDown: ext
-setSpeed: ext
-clear: ext
+include matrixLib.h
 
-	main>
-		ldi r0, 3
-		ldi r1, 0
+main>
+	ldi r0, 3
+	ldi r1, 0
 
-		jsr setTo1
+	jsr setTo1
 
-		ldi r0, 4			
-		ldi r1, 1
+	ldi r0, 4			
+	ldi r1, 1
 
-		jsr setTo1
+	jsr setTo1
 
-		ldi r0, 2
-		ldi r1, 2
-		ldi r2, 4
-		ldi r3, 2
+	ldi r0, 2
+	ldi r1, 2
+	ldi r2, 4
+	ldi r3, 2
 
-		jsr setRectTo1
+	jsr setRectTo1
 
-		ldi r0, 0b0000000000001100
+	ldi r0, 0b0000000000001100
 
-		jsr setSurv
+	jsr setSurv
 
-		ldi r0, 0b0000000000001000
+	ldi r0, 0b0000000000001000
 
-		jsr setBorn
+	jsr setBorn
 
-		jsr startGame
+	jsr startGame
 
-		rts
+	rts
 
 end

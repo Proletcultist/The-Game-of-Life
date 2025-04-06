@@ -28,10 +28,10 @@ $(LIB_DIR)/core.lib: $(addsuffix .obj, $(basename $(wildcard $(SRC_DIR)/core/*.a
 	cocas -m -o $@ $^
 
 $(TESTS_BIN_DIR)/%.img: $(TESTS_SRC_DIR)/%.asm $(LIBS) | $(TESTS_BIN_DIR)
-	cocas -o $@ $^ $(TEMP_FILES)
+	cocas $(ASS_INCLUDE) -o $@ $^ $(TEMP_FILES)
 
 $(BIN_DIR)/main.img: $(SRC_DIR)/main.asm $(LIBS) | $(BIN_DIR)
-	cocas -o $@ $^ $(TEMP_FILES)
+	cocas $(ASS_INCLUDE) -o $@ $^ $(TEMP_FILES)
 
 
 

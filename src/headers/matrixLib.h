@@ -1,0 +1,13 @@
+setTo1: ext
+setTo0: ext
+setRectTo1: ext
+setRectTo0: ext
+startGame: ext
+pauseGame: ext
+setSurv: ext
+setBorn: ext
+clear: ext
+speedDown: ext
+speedUp: ext
+setSpeed: ext
+stepOnce: ext

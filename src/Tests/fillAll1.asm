@@ -1,17 +1,7 @@
 # Main program section
 rsect main
 
-setTo1: ext
-setTo0: ext
-startGame: ext
-pauseGame: ext
-setSurv: ext
-setBorn: ext
-setRectTo1: ext
-speedUp: ext
-speedDown: ext
-setSpeed: ext
-clear: ext
+include matrixLib.h
 
 main>
 
