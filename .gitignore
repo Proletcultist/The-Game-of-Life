@@ -1,2 +1,6 @@
+# for debugging
+/build
+/.vscode
+
 /bin
 *.obj
