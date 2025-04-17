@@ -2,17 +2,20 @@ BIN_DIR = ./bin
 LIB_DIR = $(BIN_DIR)/libs
 SRC_DIR = ./src
 DBG_DIR = ./debug
+MACROS_DIR = $(SRC_DIR)/macro
 
 TESTS_BIN_DIR = $(BIN_DIR)/Tests
 TESTS_SRC_DIR = $(SRC_DIR)/Tests
 
 ASS_INCLUDE = -I ./src/headers
 
+MACROS = $(wildcard $(MACROS_DIR)/*.mlb)
+
 # TODO: Replace all temp files content to some libs
 TEMP_FILES = $(SRC_DIR)/strLiterals.asm $(SRC_DIR)/handlers.asm
 
 TESTS_SOURCES = $(notdir $(wildcard $(TESTS_SRC_DIR)/*))
-LIB_NAMES = matrixLib parserLib core
+LIB_NAMES = matrixLib parserLib core math
 LIBS = $(addprefix $(LIB_DIR)/, $(addsuffix .lib, $(LIB_NAMES)))
 
 main: $(BIN_DIR)/main.img
@@ -28,16 +31,14 @@ $(LIB_DIR)/parserLib.lib: $(addsuffix .obj, $(basename $(wildcard $(SRC_DIR)/par
 $(LIB_DIR)/core.lib: $(addsuffix .obj, $(basename $(wildcard $(SRC_DIR)/core/*.asm))) | $(LIB_DIR)
 	cocas -m -o $@ $^
 
-$(TESTS_BIN_DIR)/%.img: $(TESTS_SRC_DIR)/%.asm $(LIBS) | $(TESTS_BIN_DIR) $(DBG_DIR)
-	cocas $(ASS_INCLUDE) --debug $(DBG_DIR)/$*.dbg.json -o $@ $^ $(TEMP_FILES)
+$(TESTS_BIN_DIR)/%.img: $(TESTS_SRC_DIR)/%.asm $(LIBS) $(MACROS) | $(TESTS_BIN_DIR)
+	cocas $(ASS_INCLUDE) -o $@ $^ $(TEMP_FILES)
 
-$(BIN_DIR)/main.img: $(SRC_DIR)/main.asm $(LIBS) | $(BIN_DIR) $(DBG_DIR)
-	cocas $(ASS_INCLUDE) --debug $(DBG_DIR)/main.dbg.json -o $@ $^ $(TEMP_FILES)
+$(BIN_DIR)/main.img: $(SRC_DIR)/main.asm $(LIBS) $(MACROS) | $(BIN_DIR)
+	cocas $(ASS_INCLUDE) -o $@ $^ $(TEMP_FILES)
 
-
-
-%.obj: %.asm
-	cocas -c --debug -o $@ $^ 
+%.obj: %.asm $(MACROS)
+	cocas -c -o $@ $^ 
 
 $(BIN_DIR):
 	mkdir -p $(BIN_DIR)
