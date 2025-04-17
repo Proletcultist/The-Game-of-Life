@@ -177,7 +177,8 @@ UART controller contains UART and I/O implementation.
 ## Memory layout
 
 - 0x0000 - 0x0080 - IVT
-- 0xfee0 - SP initial value
+- 0xfc56 - SP initial value
+- 0xfc56 - 0xfee0 - templates 
 - 0xfee1 - 0xfeff - input buffer 
 - 0xff00-0xffff - I/O devices address space
 	- 0xff80-0xffff - game field (for reading and writing of current field state 16 bits at a time) 
@@ -249,6 +250,17 @@ Functions:
 	- Sets speed to specified value
 13. stepOnce
 	- Do one iteration of game
+
+## Matrix Templates
+
+Strcuture of template header:
+
+- 1 word - address of first free word in buffer
+- 20 words - header x 10:
+	- 1 word - size
+		- bits 0-4 - width
+		- bits 5-9 - height
+	- 1 word - address of first word of belong to this slot (or 0, if slot is empty)
 
 ## Interrupt handlers
 ## Main section
