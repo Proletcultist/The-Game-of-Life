@@ -1,0 +1,35 @@
+
+# 1 - buffer
+# 2 - counter
+# 3 - init address
+*initBitReader/3
+	mpush $1, $2, $3
+	
+	ldw $3, $1
+	ldi $2, 16
+
+	inc $3
+	inc $3
+
+# Shifted bit will reflect in C flag
+*readBit/0
+	mpop addr, cnt, buff
+	mpush buff, cnt, addr
+
+	if 
+		tst cnt
+	is z
+		ldw buff, addr
+		ldi cnt, 16
+
+		inc addr
+		inc addr
+	else
+	fi		
+
+	dec cnt
+
+	shl buff
+
+*destroyBitReader/0
+	mpop addr, cnt, buff

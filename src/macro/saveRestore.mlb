@@ -1,0 +1,8 @@
+
+*save/1
+	push $1
+	mpush $1
+
+*restore/0
+	mpop rd
+	pop rd
