@@ -15,7 +15,7 @@ MACROS = $(wildcard $(MACROS_DIR)/*.mlb)
 TEMP_FILES = $(SRC_DIR)/strLiterals.asm $(SRC_DIR)/handlers.asm
 
 TESTS_SOURCES = $(notdir $(wildcard $(TESTS_SRC_DIR)/*))
-LIB_NAMES = matrixLib parserLib core math
+LIB_NAMES = matrixLib parserLib core mathLib
 LIBS = $(addprefix $(LIB_DIR)/, $(addsuffix .lib, $(LIB_NAMES)))
 
 main: $(BIN_DIR)/main.img
@@ -30,6 +30,8 @@ $(LIB_DIR)/parserLib.lib: $(addsuffix .obj, $(basename $(wildcard $(SRC_DIR)/par
 	cocas -m -o $@ $^
 $(LIB_DIR)/core.lib: $(addsuffix .obj, $(basename $(wildcard $(SRC_DIR)/core/*.asm))) | $(LIB_DIR)
 	cocas -m -o $@ $^
+$(LIB_DIR)/mathLib.lib: $(addsuffix .obj, $(basename $(wildcard $(SRC_DIR)/mathLib/*.asm))) | $(LIB_DIR)
+	cocas -m -o $@ $^
 
 $(TESTS_BIN_DIR)/%.img: $(TESTS_SRC_DIR)/%.asm $(LIBS) $(MACROS) | $(TESTS_BIN_DIR)
 	cocas $(ASS_INCLUDE) -o $@ $^ $(TEMP_FILES)
@@ -38,7 +40,7 @@ $(BIN_DIR)/main.img: $(SRC_DIR)/main.asm $(LIBS) $(MACROS) | $(BIN_DIR)
 	cocas $(ASS_INCLUDE) -o $@ $^ $(TEMP_FILES)
 
 %.obj: %.asm $(MACROS)
-	cocas -c -o $@ $^ 
+	cocas $(ASS_INCLUDE) -c -o $@ $^ 
 
 $(BIN_DIR):
 	mkdir -p $(BIN_DIR)

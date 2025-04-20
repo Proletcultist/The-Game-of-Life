@@ -11,3 +11,5 @@ speedDown: ext
 speedUp: ext
 setSpeed: ext
 stepOnce: ext
+insertTemplate: ext
+saveTemplate: ext
