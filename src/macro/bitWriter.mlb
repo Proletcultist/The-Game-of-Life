@@ -1,0 +1,63 @@
+
+# 1 - buffer
+# 2 - counter
+# 3 - init address
+*initBitWriter/3
+	mpush $1, $2, $3
+
+	clr $1
+	ldi $2, 0
+
+*writeBit1/0
+	mpop addr, cnt, buff
+	mpush ?buff, ?cnt, ?addr
+
+	shl ?buff
+	inc ?buff
+	
+	inc ?cnt
+
+	if 
+		cmp ?cnt, 16
+	is eq
+		stw ?addr, ?buff
+		clr ?buff
+
+		ldi ?cnt, 0
+		add ?addr, 2
+	fi
+
+*writeBit0/0
+	mpop addr, cnt, buff
+	mpush ?buff, ?cnt, ?addr
+
+	shl ?buff
+	
+	inc ?cnt
+
+	if 
+		cmp ?cnt, 16
+	is eq
+		stw ?addr, ?buff
+		clr ?buff
+
+		ldi ?cnt, 0
+		add ?addr, 2
+	fi
+
+*destroyWriter/0
+	mpop addr, cnt, buff
+	
+	if
+		tst ?cnt
+	is nz
+		while
+			cmp ?cnt, 16
+		stays ne
+			shl ?buff
+			inc ?cnt
+		wend
+
+		stw ?addr, ?buff
+	fi
+
