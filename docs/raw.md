@@ -253,14 +253,12 @@ Functions:
 
 ## Matrix Templates
 
-Strcuture of template header:
+Template structure:
 
-- 1 word - address of first free word in buffer
-- 20 words - header x 10:
-	- 1 word - size
-		- bits 0-4 - width
-		- bits 5-9 - height
-	- 1 word - address of first word of belong to this slot (or 0, if slot is empty)
+- 1 word - header
+	- bits 0 - 4 - width
+	- bits 5 - 9 - height
+- following 64 words - template
 
 ## Interrupt handlers
 ## Main section
