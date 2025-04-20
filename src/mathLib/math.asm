@@ -5,18 +5,19 @@ uMult>
 	clr r2
 
 	while
-		tst r1
+		tst r0
 	stays nz
 		if
-			shr r1
-		is nz
-			add r0, r2
-		else
+			shr r0
+		is cs
+			add r1, r2
 		fi	
 
-		shl r0
+		shl r1
 	wend	
 
 	move r2, r0
+
+	rts
 
 end
