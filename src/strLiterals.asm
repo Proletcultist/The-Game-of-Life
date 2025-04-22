@@ -1,5 +1,5 @@
 rsect strLiterals
 
-set1> dc "s1\0"
+str_set1> dc "s1\0"
 
 end

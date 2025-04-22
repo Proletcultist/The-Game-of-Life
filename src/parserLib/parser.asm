@@ -3,19 +3,16 @@ buf:
 
 rsect parser
 
-setTo1: ext
-
-skipSpaces: ext
-strncmp: ext
-readUInt: ext
-
-set1: ext
+include matrixLib.h
+include parserUtils.h
+include strLiterals.h
 
 parse>
     ldi r0, buf
-	jsr skipSpaces
+    jsr skipSpaces
 
-	ldi r1, set1
+
+	ldi r1, str_set1
 	ldi r4, 2
 	jsr strncmp
 
@@ -25,18 +22,22 @@ parse>
         cmp r4, 1
     is eq
         jsr readUInt
-        move r1, r6
+        push r1
 
         jsr skipSpaces
 
         jsr readUInt
-        move r1, r7
+        push r1
 
-        move r6, r0
-        move r7, r1
+        pop r1
+        pop r0
         jsr setTo1
 
         rts
     fi
+
+    #print error "incorrect command"
+    ldi r6, 405
+    rts
 
 end

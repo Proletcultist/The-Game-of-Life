@@ -7,6 +7,7 @@ buf: ds 31
 rsect handlers
 
 parse: ext
+freeUART: ext
 
 default_handler>
 	ldi r3, 404
@@ -19,22 +20,33 @@ helloPrint>
 getLine>
 	ldi r0, uart
 	ldi r1, buf
-	ldi r2, 10
 
-	ldb r0, r3
+	ldb r0, r2
 	while
-		cmp r3, r2
+		cmp r2, 10
 	stays ne
-		stb r1, r3
-		ldb r1, r6
-		ldb r0, r3
+		stb r1, r2
+
+		ldi r3, 0xff00
+		if
+            cmp r1, r3
+        is eq
+            ldi r6, 404 #print error
+			jsr freeUART
+
+			# address for completing line reading
+			ldi r0, 0xff78
+			ldb r0, r0
+            rti
+        fi
+
+		ldb r0, r2
 		inc r1
 	wend
 
-	clr r2
+	ldi r2, 0
 	dec r1
 	stb r1, r2
-	ldb r1, r6
 
 	# address for completing line reading
 	ldi r0, 0xff78
