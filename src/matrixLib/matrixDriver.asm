@@ -350,4 +350,39 @@ stepOnce>
 
 	rts
 
+# r0 - x, r1 - y
+invert>
+	if
+		cmp r0, 16
+	is lo
+		ldi r2, 0
+		sub r0, 15
+		neg r0
+	else
+		ldi r2, 2
+		sub r0, 31
+		neg r0
+	fi
+
+# now r2 - x address, r0 - word offset
+	ldi r3, rowscoords
+	shl r1
+	ldw r3, r1, r3
+
+	add r3, r2
+# now r2 - matrix address
+
+	ldi r3, mtx
+	ldw r2, r3, r4
+
+	ldi r1, offsetmasks
+	shl r0
+	ldw r1, r0, r1
+
+	xor r1, r4
+
+	stw r2, r3, r4
+
+	rts
+
 end
