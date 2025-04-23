@@ -6,3 +6,5 @@
 *.obj
 
 circuits/.logisim-*
+
+docs/rendered

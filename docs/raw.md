@@ -1,6 +1,6 @@
 # General design
 
-This project is a realization of Conways' Game Of Life, built on:
+This project is a realization of Conways Game Of Life, built on:
 
 - CdM-16 as a konzertmeister of all work, language processor, which translates human-readable command lines from terminal to some instructions for theese devices (or prints an error to terminal with understandable explanation of an error).
 - [UART](https://github.com/cdm-processors/logisim-uart) (and UART controller built around it) as a main way of communicating with external terminal for implementation of the CLI.
@@ -8,8 +8,8 @@ This project is a realization of Conways' Game Of Life, built on:
 
 The core idea behind the division of responsibilities between CdM-16 and peripheral devices is ability of each peripheral device to work independently, parallel to each other:
 
-- Matrix controller can run game, while processor is always ready to receive and parse users' input without stopping the game, write an error, saying that processor cannot modify some part of game state while game is running, or actually modify some part of state, which can be modified anytime (like speed of game or pausing it).
-- UART can receive and store data in its' own buffer without any actions from processor, independently, and hold it until processor read it.
+- Matrix controller can run game, while processor is always ready to receive and parse users input without stopping the game, write an error, saying that processor cannot modify some part of game state while game is running, or actually modify some part of state, which can be modified anytime (like speed of game or pausing it).
+- UART can receive and store data in its own buffer without any actions from processor, independently, and hold it until processor read it.
 
 # Hardware
 ## Memory mapped I/O
@@ -59,7 +59,7 @@ Other auxiliary devices, will be described later.
 
 ![](./pictures/bufferRow.png)
 
-Here we have 32-bit register, holding state of one row of field and infrasctructure for modifying it and for reading its' data. 
+Here we have 32-bit register, holding state of one row of field and infrasctructure for modifying it and for reading its data. 
 
 This register is enabled only if this row is **selected** as a distination of writing act of processor or if the game is **running**. Reasons of it is obvious, we don't need to change anything when the game paused and if processor isn't writing to this row.
 
@@ -74,8 +74,8 @@ Which source of new state to use selects multiplexer in the west of register. It
 
 Respectively, in the east side of circuit we have two outputs:
 
-- **Narrow out** - output to data bus of processor. Row will pass its' first or second half on this buss (depends on **block** again) if processor reads data from this row, otherwise it won't pass anything.
-- **Wide out** - output to game processor. Row always pass its' current state to let game processor calculate its' new state if game is running.
+- **Narrow out** - output to data bus of processor. Row will pass its first or second half on this buss (depends on **block** again) if processor reads data from this row, otherwise it won't pass anything.
+- **Wide out** - output to game processor. Row always pass its current state to let game processor calculate its new state if game is running.
 
 Also, in the west side of circuit we can see, that some of inputs goes straight to output, named same as an input. This needed to pass some signals through all of rows, then they stay one above another (we will see it in next section).
 
@@ -102,7 +102,7 @@ Here is matrix buffer appearence:
 
 ![](./pictures/cell.png)
 
-Cell is a single calculator, which calculates new state of single cell, based on its' neighbours (actually on amount of alive neighbours), current status of cell and rules.
+Cell is a single calculator, which calculates new state of single cell, based on its neighbours (actually on amount of alive neighbours), current status of cell and rules.
 
 This is done by two multiplexers, selecting if cell should survive or should it become alive, and CNF, which represents following truth table:
 
@@ -119,7 +119,7 @@ This is done by two multiplexers, selecting if cell should survive or should it 
 
 #### Counter
 
-Circuit in the west side is counter, simple circuit which counts amount of its' high inputs:
+Circuit in the west side is counter, simple circuit which counts amount of its high inputs:
 
 ![](./pictures/counter.png)
 
@@ -136,7 +136,7 @@ This circuit is just 32 cells connected with each other in one row. This circuit
 All of this inputs is **current** state of this rows.
 Also, there is 2 inputs for rules, mentioned before: **surv** and **born**.
 
-All of cells' 8 **neighbour** inputs connected to appropriate wires with their neighbours statuses (except leftmost and rightmost cells, which don't have neighbours on the left and on the right respectively).
+All of cells 8 **neighbour** inputs connected to appropriate wires with their neighbours statuses (except leftmost and rightmost cells, which don't have neighbours on the left and on the right respectively).
 
 All of calculated **new** states of cells goes in single 32 bit wide wire, which goes to the only one output of game processor row - **new state of this row**.
 
@@ -148,7 +148,7 @@ Here is appearence of game processor row:
 
 ![](./pictures/gameProcessor.png)
 
-Game processors' purpose is to calculate new state of whole game field. New state is calculated, base on current, row by row. This is implemented by 32 bit counter, which indicates, which row will be calculated on this tick, and 3 multiplexers choosing appropriate **this** row, **above** row and **below** row for **game processor row** and 32 "buffering" registers, holding new state until it will be latched in matrix buffer.
+Game processors purpose is to calculate new state of whole game field. New state is calculated, base on current, row by row. This is implemented by 32 bit counter, which indicates, which row will be calculated on this tick, and 3 multiplexers choosing appropriate **this** row, **above** row and **below** row for **game processor row** and 32 "buffering" registers, holding new state until it will be latched in matrix buffer.
 
 Transition of counter value from 31 to 0 meaning, what all 32 row were calculated, causes rising of "equal" out of comparator (which compares counter value and 0), this triggers impulse on **cc** output and results in matrix buffer latching new state of whole game field.
 
@@ -202,7 +202,7 @@ main: ext
 rsect start
 
 start>
-        ldi r0, 0xfee0
+        ldi r0, 0xfc56
         stsp r0
 
         jsr main
