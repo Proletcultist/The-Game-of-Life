@@ -1,0 +1,17 @@
+\chapter*{Introduction}
+\addcontentsline{toc}{chapter}{Introduction}
+
+This project is a realization of Conways Game Of Life, built on:
+
+\begin{itemize}
+	\item CdM-16 as a konzertmeister of all work, language processor, which translates human-readable command lines from terminal to some instructions for theese devices (or prints an error to terminal with understandable explanation of an error).
+	\item \href{https://github.com/cdm-processors/logisim-uart}{UART} (and UART controller built around it) as a main way of communicating with external terminal for implementation of the CLI.
+	\item Matrix controller as a device, that makes game work and implements a low-level interface for modification of rules, speed of game, game field and controling game flow (run game, pause it or make one itaration)
+\end{itemize}
+
+The core idea behind the division of responsibilities between CdM-16 and peripheral devices is ability of each peripheral device to work independently, parallel to each other:
+
+\begin{itemize}
+	\item Matrix controller can run game, while processor is always ready to receive and parse users input without stopping the game, write an error, saying that processor cannot modify some part of game state while game is running, or actually modify some part of state, which can be modified anytime (like speed of game or pausing it).
+	\item UART can receive and store data in its own buffer without any actions from processor, independently, and hold it until processor read it.
+\end{itemize}

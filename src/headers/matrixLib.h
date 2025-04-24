@@ -13,3 +13,4 @@ setSpeed: ext
 stepOnce: ext
 insertTemplate: ext
 saveTemplate: ext
+invert: ext
