@@ -1,1 +1,14 @@
 str_set1: ext
+str_set0: ext
+str_play: ext
+str_rules: ext
+str_pause: ext
+str_inv: ext
+str_step: ext
+str_su: ext
+str_sd: ext
+str_ss: ext
+str_clr: ext
+str_srect1: ext
+str_srect0: ext
+str_help: ext

@@ -25,8 +25,6 @@ getLine>
 	while
 		cmp r2, 10
 	stays ne
-		stb r1, r2
-
 		ldi r3, 0xff00
 		if
             cmp r1, r3
@@ -39,7 +37,7 @@ getLine>
 			ldb r0, r0
             rti
         fi
-
+		stb r1, r2
 		ldb r0, r2
 		inc r1
 	wend
