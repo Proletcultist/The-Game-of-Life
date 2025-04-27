@@ -12,7 +12,7 @@ ASS_INCLUDE = -I ./src/headers
 MACROS = $(wildcard $(MACROS_DIR)/*.mlb)
 
 # TODO: Replace all temp files content to some libs
-TEMP_FILES = $(SRC_DIR)/strLiterals.asm $(SRC_DIR)/handlers.asm
+TEMP_FILES = $(SRC_DIR)/strLiterals.asm $(SRC_DIR)/handlers.asm $(SRC_DIR)/writer.asm
 
 TESTS_SOURCES = $(notdir $(wildcard $(TESTS_SRC_DIR)/*))
 LIB_NAMES = matrixLib parserLib core mathLib
