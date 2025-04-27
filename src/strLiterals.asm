@@ -13,6 +13,8 @@ str_ss> dc "ss\0"
 str_clr> dc "clr\0"
 str_srect1> dc "S1\0"
 str_srect0> dc "S0\0"
+str_savex> dc "saveX\0"
+str_loadx> dc "loadX\0"
 str_help> dc "h\0"
 
 end

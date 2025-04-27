@@ -1,28 +1,5 @@
 rsect parserUtils
 
-# $2 <= $1 <= $3
-macro isInBound/1
-  cmp $1, 48
-  blo alt'
-
-  cmp $1, 57
-  bhi alt'
-
-  mpush alt'
-mend
-
-macro notInBound/0
-  mpop where
-  mpush new?where
-  br new?where
-  ?where:  
-mend
-
-macro fiInBound/0
-  mpop term
-  ?term:
-mend
-
 offsetmasks: ext
 
 #r0 - pointer for buffer
@@ -82,12 +59,12 @@ strncmp>
 readUInt>
     ldb r0, r1
     
-    isInBound r1
+    isInBound 48, r1, 57
         push r1
 
         inc r0
         ldb r0, r1
-        isInBound r1
+        isInBound 48, r1, 57
             move r1, r2
             pop r1
 
@@ -178,7 +155,7 @@ readRules>
             is eq
                 break
             fi
-            isInBound r1
+            isInBound 48, r1, 57
                 sub r1, 48
 
                 ldi r3, offsetmasks
@@ -233,7 +210,7 @@ readRules>
             is eq
                 break
             fi
-            isInBound r1
+            isInBound 48, r1, 57
                 sub r1, 48
 
                 ldi r3, offsetmasks

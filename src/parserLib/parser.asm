@@ -6,6 +6,7 @@ rsect parser
 include matrixLib.h
 include parserUtils.h
 include strLiterals.h
+writeToUART: ext
 
 parse>
     #setTo1
@@ -50,9 +51,11 @@ parse>
             rts
         fi
 
-        move r3, r0
-        move r5, r1
-        jsr setTo1
+        # move r3, r0
+        # move r5, r1
+        # jsr setTo1
+        ldi r0, str_loadx
+        jsr writeToUART
 
         rts
     fi
@@ -470,84 +473,12 @@ parse>
     fi
 
 
-    # #setRectTo0
-    # ldi r0, buf
-    # jsr skipSpaces
-
-	# ldi r1, str_srect0
-	# ldi r4, 2
-	# jsr strncmp
-
-    # jsr skipSpaces
-
-    # if
-    #     cmp r4, 1
-    # is eq
-    #     jsr readUInt
-    #     if
-    #         cmp r1, -1
-    #     is eq
-    #         rts
-    #     fi
-    #     move r1, r3
-
-    #     jsr skipSpaces
-
-    #     jsr readUInt
-    #     if
-    #         cmp r1, -1
-    #     is eq
-    #         rts
-    #     fi
-    #     move r1, r4
-
-    #     jsr skipSpaces
-
-    #     jsr readUInt
-    #     if
-    #         cmp r1, -1
-    #     is eq
-    #         rts
-    #     fi
-    #     move r1, r5
-
-    #     jsr skipSpaces
-
-    #     jsr readUInt
-    #     if
-    #         cmp r1, -1
-    #     is eq
-    #         rts
-    #     fi
-    #     move r1, r6
-
-    #     jsr skipSpaces
-
-    #     ldb r0, r1
-    #     if
-    #         cmp r1, 0
-    #     is ne
-    #         #print error "incorrect input"
-    #         ldi r6, 406
-    #         rts
-    #     fi
-
-    #     move r3, r0
-    #     move r4, r1
-    #     move r5, r2
-    #     move r6, r3
-    #     jsr setRectTo0
-
-    #     rts
-    # fi
-
-
-    #help
+    #setRectTo0
     ldi r0, buf
     jsr skipSpaces
 
-    ldi r1, str_help
-	ldi r4, 1
+	ldi r1, str_srect0
+	ldi r4, 2
 	jsr strncmp
 
     jsr skipSpaces
@@ -555,6 +486,46 @@ parse>
     if
         cmp r4, 1
     is eq
+        jsr readUInt
+        if
+            cmp r1, -1
+        is eq
+            rts
+        fi
+        move r1, r3
+
+        jsr skipSpaces
+
+        jsr readUInt
+        if
+            cmp r1, -1
+        is eq
+            rts
+        fi
+        move r1, r4
+
+        jsr skipSpaces
+
+        jsr readUInt
+        if
+            cmp r1, -1
+        is eq
+            rts
+        fi
+        move r1, r5
+
+        jsr skipSpaces
+
+        jsr readUInt
+        if
+            cmp r1, -1
+        is eq
+            rts
+        fi
+        move r1, r6
+
+        jsr skipSpaces
+
         ldb r0, r1
         if
             cmp r1, 0
@@ -564,7 +535,168 @@ parse>
             rts
         fi
 
-        ldi r0, 7
+        move r3, r0
+        move r4, r1
+        move r5, r2
+        move r6, r3
+        jsr setRectTo0
+
+        rts
+    fi
+
+
+    #saveTemplate
+    ldi r0, buf
+    jsr skipSpaces
+
+	ldi r1, str_savex
+	ldi r4, 5
+	jsr strncmp
+
+    jsr skipSpaces
+
+    if
+        cmp r4, 1
+    is eq
+        jsr readUInt
+        if
+            cmp r1, -1
+        is eq
+            rts
+        fi
+        isInBound 0, r1, 4
+            move r1, r3
+        notInBound
+            #print error "too large argument"
+            ldi r6, 414
+            rts
+        fiInBound
+
+        jsr skipSpaces
+
+        jsr readUInt
+        if
+            cmp r1, -1
+        is eq
+            rts
+        fi
+        move r1, r4
+
+        jsr skipSpaces
+
+        jsr readUInt
+        if
+            cmp r1, -1
+        is eq
+            rts
+        fi
+        move r1, r5
+
+        jsr skipSpaces
+
+        jsr readUInt
+        if
+            cmp r1, -1
+        is eq
+            rts
+        fi
+        move r1, r6
+
+        jsr skipSpaces
+
+        jsr readUInt
+        if
+            cmp r1, -1
+        is eq
+            rts
+        fi
+        move r1, r7
+
+        jsr skipSpaces
+
+        ldb r0, r1
+        if
+            cmp r1, 0
+        is ne
+            #print error "incorrect input"
+            ldi r6, 406
+            rts
+        fi
+
+        move r3, r0
+        move r4, r1
+        move r5, r2
+        move r6, r3
+        move r7, r4
+        jsr saveTemplate
+
+        rts
+    fi
+
+
+    #loadTemplate
+    ldi r0, buf
+    jsr skipSpaces
+
+	ldi r1, str_loadx
+	ldi r4, 5
+	jsr strncmp
+
+    jsr skipSpaces
+
+    if
+        cmp r4, 1
+    is eq
+        jsr readUInt
+        if
+            cmp r1, -1
+        is eq
+            rts
+        fi
+        isInBound 0, r1, 4
+            move r1, r3
+        notInBound
+            #print error "too large argument"
+            ldi r6, 414
+            rts
+        fiInBound
+
+        jsr skipSpaces
+
+        jsr readUInt
+        if
+            cmp r1, -1
+        is eq
+            rts
+        fi
+        move r1, r4
+
+        jsr skipSpaces
+
+        jsr readUInt
+        if
+            cmp r1, -1
+        is eq
+            rts
+        fi
+        move r1, r5
+
+        jsr skipSpaces
+
+        ldb r0, r1
+        if
+            cmp r1, 0
+        is ne
+            #print error "incorrect input"
+            ldi r6, 406
+            rts
+        fi
+
+        move r3, r0
+        move r4, r1
+        move r5, r2
+        jsr insertTemplate
+
         rts
     fi
 
