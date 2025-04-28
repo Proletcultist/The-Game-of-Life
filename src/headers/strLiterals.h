@@ -14,3 +14,17 @@ str_srect0: ext
 str_help: ext
 str_savex: ext
 str_loadx: ext
+str_input: ext
+str_help_txt: ext
+str_succ: ext
+error_large_coord: ext
+error_inc_inp: ext
+error_few_args: ext
+error_no_args: ext
+error_inc_com: ext
+error_no_com: ext
+error_many_args: ext
+error_large_num: ext
+error_x_higher: ext
+error_y_higher: ext
+error_many_chars: ext

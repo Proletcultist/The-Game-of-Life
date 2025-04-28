@@ -1,6 +1,8 @@
 rsect parserUtils
 
+include strLiterals.h
 offsetmasks: ext
+writeToUART: ext
 
 #r0 - pointer for buffer
 skipSpaces>
@@ -80,8 +82,9 @@ readUInt>
                 cmp r2, 31
             is hi
                 #print error "large coordinates"
+                ldi r0, error_large_coord
+                jsr writeToUART
                 ldi r1, -1
-                ldi r6, 400
                 rts
             fi
 
@@ -105,8 +108,9 @@ readUInt>
             rts
         fi
         #print error "incorrect input"
+        ldi r0, error_inc_inp
+        jsr writeToUART
         ldi r1, -1
-        ldi r6, 401
         rts
 
     notInBound
@@ -114,12 +118,14 @@ readUInt>
             cmp r1, 0
         is eq
             #print error "too few args"
+            ldi r0, error_few_args
+            jsr writeToUART
             ldi r1, -1
-            ldi r6, 402
         else
             #print error "incorrect input"
+            ldi r0, error_inc_inp
+            jsr writeToUART
             ldi r1, -1
-            ldi r6, 403
         fi
         rts
     fiInBound
@@ -169,7 +175,8 @@ readRules>
                 ldb r0, r1
             notInBound
                 #print error "incorrect input"
-                ldi r6, 407
+                ldi r0, error_inc_inp
+                jsr writeToUART
                 ldi r1, -1
                 rts
             fiInBound
@@ -179,7 +186,8 @@ readRules>
             cmp r1, r3
         is ne
             #print error "incorrect input"
-            ldi r6, 409
+            ldi r0, error_inc_inp
+            jsr writeToUART
             ldi r1, -1
             rts
         fi
@@ -188,7 +196,8 @@ readRules>
             cmp r2, 0
         is eq
             #print error "no arguments"
-            ldi r6, 408
+            ldi r0, error_no_args
+            jsr writeToUART
             ldi r1, -1
             rts
         fi
@@ -224,7 +233,8 @@ readRules>
                 ldb r0, r1
             notInBound
                 #print error "incorrect input"
-                ldi r6, 410
+                ldi r0, error_inc_inp
+                jsr writeToUART
                 ldi r1, -1
                 rts
             fiInBound
@@ -236,7 +246,8 @@ readRules>
                 cmp r1, 0
             is ne
                 #print error "incorrect input"
-                ldi r6, 411
+                ldi r0, error_inc_inp
+                jsr writeToUART
                 ldi r1, -1
                 rts
             fi
@@ -245,16 +256,18 @@ readRules>
         if
             cmp r5, 0
         is eq
-            #print error "too few arguments"
-            ldi r6, 412
+            #print error "no arguments"
+            ldi r0, error_no_args
+            jsr writeToUART
             ldi r1, -1
             rts
         fi
 
         rts
     else
-        #print error "no arguments"
-        ldi r6, 413
+        #print error "incorrect input"
+        ldi r0, error_inc_inp
+        jsr writeToUART
         ldi r1, -1
         rts
     fi

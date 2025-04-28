@@ -14,9 +14,6 @@ writeToUART>
         inc r0
         ldb r0, r2
     wend
-    ldi r2, 13
-    stb r1, r2
-    ldi r2, 10
-    stb r1, r2
+    rts
 
 end
