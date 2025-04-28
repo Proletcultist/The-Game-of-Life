@@ -1,29 +1,8 @@
 rsect parserUtils
 
-# $2 <= $1 <= $3
-macro isInBound/1
-  cmp $1, 48
-  blo alt'
-
-  cmp $1, 57
-  bhi alt'
-
-  mpush alt'
-mend
-
-macro notInBound/0
-  mpop where
-  mpush new?where
-  br new?where
-  ?where:  
-mend
-
-macro fiInBound/0
-  mpop term
-  ?term:
-mend
-
+include strLiterals.h
 offsetmasks: ext
+writeToUART: ext
 
 #r0 - pointer for buffer
 skipSpaces>
@@ -82,12 +61,12 @@ strncmp>
 readUInt>
     ldb r0, r1
     
-    isInBound r1
+    isInBound 48, r1, 57
         push r1
 
         inc r0
         ldb r0, r1
-        isInBound r1
+        isInBound 48, r1, 57
             move r1, r2
             pop r1
 
@@ -103,8 +82,9 @@ readUInt>
                 cmp r2, 31
             is hi
                 #print error "large coordinates"
+                ldi r0, error_large_coord
+                jsr writeToUART
                 ldi r1, -1
-                ldi r6, 400
                 rts
             fi
 
@@ -128,8 +108,9 @@ readUInt>
             rts
         fi
         #print error "incorrect input"
+        ldi r0, error_inc_inp
+        jsr writeToUART
         ldi r1, -1
-        ldi r6, 401
         rts
 
     notInBound
@@ -137,12 +118,14 @@ readUInt>
             cmp r1, 0
         is eq
             #print error "too few args"
+            ldi r0, error_few_args
+            jsr writeToUART
             ldi r1, -1
-            ldi r6, 402
         else
             #print error "incorrect input"
+            ldi r0, error_inc_inp
+            jsr writeToUART
             ldi r1, -1
-            ldi r6, 403
         fi
         rts
     fiInBound
@@ -178,7 +161,7 @@ readRules>
             is eq
                 break
             fi
-            isInBound r1
+            isInBound 48, r1, 57
                 sub r1, 48
 
                 ldi r3, offsetmasks
@@ -192,7 +175,8 @@ readRules>
                 ldb r0, r1
             notInBound
                 #print error "incorrect input"
-                ldi r6, 407
+                ldi r0, error_inc_inp
+                jsr writeToUART
                 ldi r1, -1
                 rts
             fiInBound
@@ -202,7 +186,8 @@ readRules>
             cmp r1, r3
         is ne
             #print error "incorrect input"
-            ldi r6, 409
+            ldi r0, error_inc_inp
+            jsr writeToUART
             ldi r1, -1
             rts
         fi
@@ -211,7 +196,8 @@ readRules>
             cmp r2, 0
         is eq
             #print error "no arguments"
-            ldi r6, 408
+            ldi r0, error_no_args
+            jsr writeToUART
             ldi r1, -1
             rts
         fi
@@ -233,7 +219,7 @@ readRules>
             is eq
                 break
             fi
-            isInBound r1
+            isInBound 48, r1, 57
                 sub r1, 48
 
                 ldi r3, offsetmasks
@@ -247,7 +233,8 @@ readRules>
                 ldb r0, r1
             notInBound
                 #print error "incorrect input"
-                ldi r6, 410
+                ldi r0, error_inc_inp
+                jsr writeToUART
                 ldi r1, -1
                 rts
             fiInBound
@@ -259,7 +246,8 @@ readRules>
                 cmp r1, 0
             is ne
                 #print error "incorrect input"
-                ldi r6, 411
+                ldi r0, error_inc_inp
+                jsr writeToUART
                 ldi r1, -1
                 rts
             fi
@@ -268,16 +256,18 @@ readRules>
         if
             cmp r5, 0
         is eq
-            #print error "too few arguments"
-            ldi r6, 412
+            #print error "no arguments"
+            ldi r0, error_no_args
+            jsr writeToUART
             ldi r1, -1
             rts
         fi
 
         rts
     else
-        #print error "no arguments"
-        ldi r6, 413
+        #print error "incorrect input"
+        ldi r0, error_inc_inp
+        jsr writeToUART
         ldi r1, -1
         rts
     fi

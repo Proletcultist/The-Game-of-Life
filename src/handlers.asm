@@ -8,13 +8,18 @@ rsect handlers
 
 parse: ext
 freeUART: ext
+writeToUART: ext
+
+str_input: ext
+error_many_chars: ext
 
 default_handler>
 	ldi r3, 404
     halt
 
 helloPrint>
-	ldi r0, 588
+	ldi r0, str_input
+	jsr writeToUART
 	rti
 
 getLine>
@@ -29,12 +34,19 @@ getLine>
 		if
             cmp r1, r3
         is eq
-            ldi r6, 404 #print error
+            #print error
+			ldi r0, error_many_chars
+			jsr writeToUART
+
+			ldi r0, uart
 			jsr freeUART
 
 			# address for completing line reading
 			ldi r0, 0xff78
 			ldb r0, r0
+
+			ldi r0, str_input
+			jsr writeToUART
             rti
         fi
 		stb r1, r2
@@ -51,6 +63,9 @@ getLine>
 	ldb r0, r0
 
 	jsr parse
+
+	ldi r0, str_input
+	jsr writeToUART
 
 	rti
 

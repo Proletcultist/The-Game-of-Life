@@ -1,0 +1,17 @@
+# $1 <= $2 <= $3
+*isInBound/3
+  cmp $2, $1
+  blo alt'
+  cmp $2, $3
+  bhi alt'
+  mpush alt'
+
+*notInBound/0
+  mpop where
+  mpush new?where
+  br new?where
+  ?where:  
+
+*fiInBound/0
+  mpop term
+  ?term:
