@@ -18,7 +18,7 @@
 	if 
 		tst ?cnt
 	is z
-		ldw ?buff, ?addr
+		ldw ?addr, ?buff
 		ldi ?cnt, 16
 
 		add ?addr, 2
