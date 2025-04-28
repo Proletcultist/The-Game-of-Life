@@ -4,6 +4,8 @@
 \section*{Product features}
 \addcontentsline{toc}{section}{Product features}
 
+All developed hardware presented as logisim circuits.
+
 Product realise cellular automaton with 32x32 game field and set of rules, including:
 
 \begin{itemize}
@@ -23,10 +25,22 @@ Product allows user to connect to it with external terminal through UART. With t
 	\item Save and paste templates (some part specified part of game field, stored in one of 5 slots)
 \end{itemize}
 
+% TODO: Add DFD diagramm
+
 \section*{Operating environment}
 \addcontentsline{toc}{section}{Operating environment}
 
+For running product you need:
 
+\begin{itemize}
+	\item Logisim
+	\item \href{https://github.com/cdm-processors/cdm-devkit}{CdM-devkit} ver. 0.2.2 or above JAR libraries (cdm16 emulator, banked memory)
+	\item UART JAR library
+\end{itemize}
 
+For building purposes you need:
 
-	% Operating environment Окружение, в котором работает продукт: процессор, юарт, cdm-devkit(?)
+\begin{itemize}
+	\item \href{https://github.com/Proletcultist/cdm-devkit-macro-improvements}{This} fork of CdM-devkit
+	\item Some of make implementation (such as GNU make)
+\end{itemize}

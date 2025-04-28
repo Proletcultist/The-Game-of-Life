@@ -4,5 +4,9 @@
 \section*{Matrix controller}
 \addcontentsline{toc}{section}{Matrix controller}
 
+Matrix controller realises cellular automaton, it consists of sequential and combinatory parts. Matrix controller connected to processor I/O bus, so its inner parts can communicate with processor through this bus. Also matrix controller connected to clock in order to synchronise acts of reading and modifying its state with processor.
+
+Sequential part consists of matrix buffer, which holds game field state, and status registers  which hold game rules and game state (is game running or not). Both matrix buffer and status registers can be read and modified using load/store operations of processor with addresses, specified for this purposes.
+
 \section*{UART controller}
 \addcontentsline{toc}{section}{UART controller}
