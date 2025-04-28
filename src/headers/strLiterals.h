@@ -12,3 +12,4 @@ str_clr: ext
 str_srect1: ext
 str_srect0: ext
 str_help: ext
+str_hello: ext
