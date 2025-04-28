@@ -7,10 +7,13 @@ align 0xfee0
 rsect matrixTemplates
 
 include mathLib.h
+include strLiterals.h
 
 mtx: ext
 rowscoords: ext
 offsetmasks: ext
+
+writeToUART: ext
 
 # r0 - slot number, r1 - x, r2 - y
 insertTemplate>
@@ -33,6 +36,11 @@ insertTemplate>
 		tst r3
 	is z
 		# Specified slot is empty
+		ldi r0, error_slot_is_empty
+		jsr writeToUART
+
+		ldi r2, -1
+
 		rts
 	fi
 
@@ -60,12 +68,22 @@ insertTemplate>
 		cmp r3, 31
 	is hi
 		# Template does not fit by width
+		ldi r0, error_template_too_big_x
+		jsr writeToUART
+
+		ldi r2, -1
+
 		rts
 	fi	
 	if 
 		cmp r4, 31
 	is hi
 		# Template does not fit by height
+		ldi r0, error_template_too_big_y
+		jsr writeToUART
+
+		ldi r2, -1
+
 		rts
 	fi
 

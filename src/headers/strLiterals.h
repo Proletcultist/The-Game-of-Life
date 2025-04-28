@@ -17,6 +17,7 @@ str_loadx: ext
 str_input: ext
 str_help_txt: ext
 str_succ: ext
+str_hello: ext
 error_large_coord: ext
 error_inc_inp: ext
 error_few_args: ext
@@ -28,3 +29,6 @@ error_large_num: ext
 error_x_higher: ext
 error_y_higher: ext
 error_many_chars: ext
+error_slot_is_empty: ext
+error_template_too_big_x: ext
+error_template_too_big_y: ext

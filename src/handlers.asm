@@ -10,15 +10,14 @@ parse: ext
 freeUART: ext
 writeToUART: ext
 
-str_input: ext
-error_many_chars: ext
+include strLiterals.h
 
 default_handler>
 	ldi r3, 404
     halt
 
 helloPrint>
-	ldi r0, str_input
+	ldi r0, str_hello
 	jsr writeToUART
 	rti
 

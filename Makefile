@@ -34,14 +34,14 @@ $(LIB_DIR)/mathLib.lib: $(addsuffix .obj, $(basename $(wildcard $(SRC_DIR)/mathL
 	cocas -m -o $@ $^
 
 
-%.debug: $(TESTS_SRC_DIR)/%.asm $(wildcard $(addprefix $(SRC_DIR)/, $(addsuffix /*.asm, $(LIB_NAMES)))) $(MACROS) | $(LIB_DIR) $(TESTS_BIN_DIR) $(DBG_DIR)
-	cocas $(ASS_INCLUDE) -o $(TESTS_BIN_DIR)/$*.img --debug $(DBG_DIR)/$*.dbg.json $^ $(TEMP_FILES)
+%.debug: $(TESTS_SRC_DIR)/%.asm $(wildcard $(addprefix $(SRC_DIR)/, $(addsuffix /*.asm, $(LIB_NAMES)))) $(MACROS) $(TEMP_FILES) | $(LIB_DIR) $(TESTS_BIN_DIR) $(DBG_DIR)
+	cocas $(ASS_INCLUDE) -o $(TESTS_BIN_DIR)/$*.img --debug $(DBG_DIR)/$*.dbg.json $^ 
 
-$(TESTS_BIN_DIR)/%.img: $(TESTS_SRC_DIR)/%.asm $(LIBS) $(MACROS) | $(TESTS_BIN_DIR)
-	cocas $(ASS_INCLUDE) -o $@ $^ $(TEMP_FILES)
+$(TESTS_BIN_DIR)/%.img: $(TESTS_SRC_DIR)/%.asm $(LIBS) $(MACROS) $(TEMP_FILES) | $(TESTS_BIN_DIR)
+	cocas $(ASS_INCLUDE) -o $@ $^
 
-$(BIN_DIR)/main.img: $(SRC_DIR)/main.asm $(LIBS) $(MACROS) | $(BIN_DIR)
-	cocas $(ASS_INCLUDE) -o $@ $^ $(TEMP_FILES)
+$(BIN_DIR)/main.img: $(SRC_DIR)/main.asm $(LIBS) $(MACROS) $(TEMP_FILES) | $(BIN_DIR)
+	cocas $(ASS_INCLUDE) -o $@ $^
 
 %.obj: %.asm $(MACROS)
 	cocas $(ASS_INCLUDE) -c -o $@ $^ 

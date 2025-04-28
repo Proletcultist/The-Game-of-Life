@@ -1,0 +1,18 @@
+\chapter*{Hardware requirements}
+\addcontentsline{toc}{chapter}{Hardware requirements}
+
+\section*{Matrix controller}
+\addcontentsline{toc}{section}{Matrix controller}
+
+Matrix controller realises cellular automaton, it consists of sequential and combinatory parts. Matrix controller connected to processor I/O bus, so its inner parts can communicate with processor through this bus. Also matrix controller connected to clock in order to synchronise acts of reading and modifying its state with processor.
+
+Sequential part consists of matrix buffer, which holds game field state, and status registers  which hold game rules and game state (is game running or not). Both matrix buffer and status registers can be read and modified using load/store operations of processor with addresses, specified for this purposes, moreover, whole their status is visible for combinatory part. Matrix buffer, also, can be rewrited all at once by combinatory part.
+
+Combinatory part presented by game processor, it can map current matrix buffer state to next state, depend on status registers content, and provide this new state to matrix buffer.
+
+Also, there is a SR trigger in matrix controller, which processor can set (by accessing specified address) in order to trigger one iteration of the game, it will be reset automaticaly as soon as this iteration end.
+
+% Add DFD diagramm
+
+\section*{UART controller}
+\addcontentsline{toc}{section}{UART controller}

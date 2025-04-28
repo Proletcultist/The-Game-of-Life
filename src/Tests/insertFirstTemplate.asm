@@ -8,7 +8,7 @@ main>
 
 	ldi r0, 0
 	ldi r1, 5
-	ldi r2, 29
+	ldi r2, 30
 	jsr insertTemplate
 
 	rts
