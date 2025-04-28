@@ -1,0 +1,32 @@
+\chapter*{Overall description}
+\addcontentsline{toc}{chapter}{Overall description}
+
+\section*{Product features}
+\addcontentsline{toc}{section}{Product features}
+
+Product realise cellular automaton with 32x32 game field and set of rules, including:
+
+\begin{itemize}
+	\item \textbf{Born} - set of integers from 0 to 8, specifying, with what amount of alive neighbours cell will become alive.
+	\item \textbf{Surv} - set of integers from 0 to 8, specifying, with what amount of alive neighbours cell will survive.
+	\item \textbf{Speed} - integer from 0 to 3, specifying game speed.
+\end{itemize}
+
+CdM-16 processor has the ability to communicate with cellular automaton, within this communication processor can read and modify automaton state.
+
+Product allows user to connect to it with external terminal through UART. With this connection user can do following:
+
+\begin{itemize}
+	\item Modify game field
+	\item Modify rules
+	\item Control game flow, start or pause game, trigger single iteration of game
+	\item Save and paste templates (some part specified part of game field, stored in one of 5 slots)
+\end{itemize}
+
+\section*{Operating environment}
+\addcontentsline{toc}{section}{Operating environment}
+
+
+
+
+	% Operating environment Окружение, в котором работает продукт: процессор, юарт, cdm-devkit(?)
