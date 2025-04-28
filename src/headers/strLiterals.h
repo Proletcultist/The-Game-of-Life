@@ -29,3 +29,6 @@ error_large_num: ext
 error_x_higher: ext
 error_y_higher: ext
 error_many_chars: ext
+error_slot_is_empty: ext
+error_template_too_big_x: ext
+error_template_too_big_y: ext
