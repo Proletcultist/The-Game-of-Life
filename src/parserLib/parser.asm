@@ -881,6 +881,12 @@ parse>
         move r5, r2
         jsr insertTemplate
 
+	if
+		cmp r2, -1
+	is eq
+		rts
+	fi
+
         ldi r0, str_succ
         jsr writeToUART
         rts
