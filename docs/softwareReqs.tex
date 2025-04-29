@@ -37,5 +37,5 @@ There are two interrupt handlers:
 
 \begin{enumerate}
 	\item Handler for connection interrupt. It prints hello message and shell prompt character.
-	\item 
+	\item  Handler for new data interrupt. It reads single line from UART (it assumes, what line ends with CR LF symbols) to input buffer in memory and calls parser function.
 \end{enumerate}

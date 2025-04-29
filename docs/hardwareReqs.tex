@@ -51,9 +51,13 @@ UART controller is device, which implements interface for processor to interact 
 \begin{enumerate}
 	\item Read sybmbol from input buffer of UART through loading from specified address.
 	\item Write symbol to UART through storing to same address.
-	\item Receive connection interrupt (see next section).
-	\item Receive new data interrupt (see next section).
+	\item Receive connection interrupt.
+	\item Receive new data interrupt.
 \end{enumerate}
+
+UART controller generates connection interrupt every time some external terminal connects to it.
+
+UART controller generates new data interrupt on every single line, that it receives, until all lines are read from it.
 
 \section*{Interrupt bus}
 \addcontentsline{toc}{section}{Interrupt bus}

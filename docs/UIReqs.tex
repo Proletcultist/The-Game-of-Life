@@ -4,5 +4,15 @@
 \section*{General design}
 \addcontentsline{toc}{section}{General design}
 
+For interaction with user CLI is used. Always, when product is ready to process new user input, it prints shell prompt character - '>'.
+
+When single line of user input is processed, product let user know, if this input is processed successfuly or is there an error in this input and what type of error it is.
+
+Also, there is a limit for size of single user input line. The limit is 30 characters, so, if user input some line longer, than that limit, product let him know about this and correctly process this situation, preventing buffer overflow and removing from UART input buffer "tail" of line, which exceeded limit.
+
 \section*{Commands list}
 \addcontentsline{toc}{section}{Commands list}
+
+Here is list of commands, which products CLI im0lements:
+
+
