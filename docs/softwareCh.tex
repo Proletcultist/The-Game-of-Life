@@ -54,13 +54,18 @@ Functions:
 \begin{enumerate}
 	\item setTo1
 		\begin{itemize}
-			\item Arguments: \textbf{r0} - x, \textbf{r1} - y. Coordinates should be in range 0-31.
-			\item Sets cell with coordinates (x, y) to alive status
+			\item Arguments: \textbf{r0} - $x$, \textbf{r1} - $y$. Coordinates should be in range 0-31.
+			\item Sets cell with coordinates $(x, y)$ to alive status
 		\end{itemize}
 	\item setTo0
 		\begin{itemize}
-			\item Arguments: \textbf{r0} - x, \textbf{r1} - y. Coordinates should be in range 0-31.
-			\item Sets cell with coordinates (x, y) to dead status
+			\item Arguments: \textbf{r0} - $x$, \textbf{r1} - $y$. Coordinates should be in range 0-31.
+			\item Sets cell with coordinates $(x, y)$ to dead status
+		\end{itemize}
+	\item invert
+		\begin{itemize}
+			\item Arguments: \textbf{r0} - $x$, \textbf{r1} - $y$. Coordinates should be in range 0-31.
+			\item Inverts cell status with coordinates $(x, y)$
 		\end{itemize}
 	\item setRectTo1
 		\begin{itemize}
@@ -111,7 +116,16 @@ Functions:
 		\begin{itemize}
 			\item Do one iteration of game
 		\end{itemize}
-	% TODO: Add info about new functions
+	\item insertTemplate
+		\begin{itemize}
+			\item Arguments: \textbf{r0} - slot number, \textbf{r1} - $x$, \textbf{r2} - $y$. Coordinates should be in range 0-31.
+			\item Inserts template from specified slot, corrdinates $x$, $y$ specify upper left corner of inserted template.
+		\end{itemize}
+	\item saveTemplate
+		\begin{itemize}
+			\item Arguments: \textbf{r0} - slot number, \textbf{r1} - $x_{1}$, \textbf{r2} - $y_{1}$, \textbf{r3} - $x_{2}$, \textbf{r4} - $y_{2}$.
+			\item Saves area with upper left corner $(x_{1}, y_{1})$ and lower right corner $(x_{2}, y_{2})$ as template to specified slot.
+		\end{itemize}
 \end{enumerate}
 
 \subsection*{Matrix templates}

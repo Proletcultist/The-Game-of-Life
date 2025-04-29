@@ -4,8 +4,38 @@
 \section*{Matrix driver}
 \addcontentsline{toc}{section}{Matrix driver}
 
+Matrix driver is a library, which implements functions, allowing abstraction from low-level interactions with matrix controller. This library has functions for following:
+
+\begin{enumerate}
+	\item Setting single cell to alive status.
+	\item Setting single cell to dead status.
+	\item Inverting single cell status.
+	\item Setting rectangle of cells to alive status.
+	\item Setting rectangle of cells to dead status.
+	\item Starting game.
+	\item Pausing game.
+	\item Setting \textbf{surv} rule.
+	\item Setting \textbf{born} rule.
+	\item Clearing whole game field.
+	\item Incrementing speed of game.
+	\item Decrementing speed of game.
+	\item Setting speed of game to specified value.
+	\item Triggering single iteration of game.
+	\item Saving template.
+	\item Inserting template.
+\end{enumerate}
+
 \section*{Parser library}
 \addcontentsline{toc}{section}{Parser library}
 
-\section*{Interrupts}
-\addcontentsline{toc}{section}{Interrupts}
+Parser library implements function for parsing command line, stored in input buffer in memory. This function gets command, its arguments, checks all of this for errors, if there is any error, function print meaningful error message, otherwise it calls appropriate function from matrix driver with parsed arguments.
+
+\section*{Interrupt handlers}
+\addcontentsline{toc}{section}{Interrupt handlers}
+
+There are two interrupt handlers:
+
+\begin{enumerate}
+	\item Handler for connection interrupt. It prints hello message and shell prompt character.
+	\item 
+\end{enumerate}
