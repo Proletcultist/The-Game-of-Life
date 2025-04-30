@@ -274,6 +274,14 @@ Functions:
  - Frees UART buffer
 
 ## Interrupt handlers
+
+1. **helloPrint**
+	- Prints welcome message
+	- It's called when UART is connected
+2. **getLine**
+	- Reads string from UART buffer and parses it
+	- It's called when UART buffer has symbols
+
 ## Main section
 
 ```
