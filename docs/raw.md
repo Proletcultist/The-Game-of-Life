@@ -260,8 +260,45 @@ Template structure:
 	- bits 5 - 9 - height
 - following 64 words - template
 
+## UART Library
+
+Functions:
+
+1. **readFromUART**
+ - Reads string from UART buffer. Maximum string size - 30 chars.
+2. **writeToUART**
+ - Arguments: r0 - pointer to string
+ - Writes string to UART buffer
+3. **freeUART**
+ - Arguments: r0 - pointer to UART buffer
+ - Frees UART buffer
+
 ## Interrupt handlers
+
+1. **helloPrint**
+	- Prints welcome message
+	- It's called when UART is connected
+2. **getLine**
+	- Reads string from UART buffer and parses it
+	- It's called when UART buffer has symbols
+
 ## Main section
+
+```
+rsect main
+
+main>
+	ei
+
+	w:
+	wait
+	br w
+
+	rts
+
+end
+```
+
 ## Commands list
 
 1. `h` - print help message
@@ -277,8 +314,9 @@ Template structure:
 11. `ss n` - set speed to n
 12. `S1 x1 y1 x2 y2` -  Sets all cells in rectangle with upper left corner (x1, y1) and lower right corner (x2, y2) to alive status
 13. `S0 x1 y1 x2 y2` -  Sets all cells in rectangle with upper left corner (x1, y1) and lower right corner (x2, y2) to dead status
-14. `saveX x1 y1 x2 y2` - Save all cells in rectangle with upper left corner (x1, y1) and lower right corner (x2, y2) to slot number X
-15. `loadX x y` - Copy all cells from slot X to rectangle with upper left corner (x1, y1)
+14. `save n x1 y1 x2 y2` - Save all cells in rectangle with upper left corner (x1, y1) and lower right corner (x2, y2) to slot number n
+15. `load n x y` - Copy all cells from slot n to rectangle with upper left corner (x1, y1)
+16. `clr` - Clear game field
 
 ## Commands parsing
 
@@ -293,6 +331,9 @@ Functions:
 3. **readUInt**
  - Arguments: r0 - pointer to buffer's symbol
  - Gets a number from the buffer from the current symbol
+4. **readRules**
+ - Arguments: r0 - pointer to buffer's symbol
+ - Gets rules from the buffer from the current symbol
 
 General algorithm for parsing:
 

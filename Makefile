@@ -12,10 +12,10 @@ ASS_INCLUDE = -I ./src/headers
 MACROS = $(wildcard $(MACROS_DIR)/*.mlb)
 
 # TODO: Replace all temp files content to some libs
-TEMP_FILES = $(SRC_DIR)/strLiterals.asm $(SRC_DIR)/handlers.asm $(SRC_DIR)/writer.asm
+TEMP_FILES = $(SRC_DIR)/strLiterals.asm $(SRC_DIR)/handlers.asm
 
 TESTS_SOURCES = $(notdir $(wildcard $(TESTS_SRC_DIR)/*))
-LIB_NAMES = matrixLib parserLib core mathLib
+LIB_NAMES = matrixLib parserLib uartLib core mathLib
 LIBS = $(addprefix $(LIB_DIR)/, $(addsuffix .lib, $(LIB_NAMES)))
 
 main: $(BIN_DIR)/main.img
@@ -27,6 +27,8 @@ all: libs main tests
 $(LIB_DIR)/matrixLib.lib: $(addsuffix .obj, $(basename $(wildcard $(SRC_DIR)/matrixLib/*.asm))) | $(LIB_DIR)
 	cocas -m -o $@ $^
 $(LIB_DIR)/parserLib.lib: $(addsuffix .obj, $(basename $(wildcard $(SRC_DIR)/parserLib/*.asm))) | $(LIB_DIR)
+	cocas -m -o $@ $^
+$(LIB_DIR)/uartLib.lib: $(addsuffix .obj, $(basename $(wildcard $(SRC_DIR)/uartLib/*.asm))) | $(LIB_DIR)
 	cocas -m -o $@ $^
 $(LIB_DIR)/core.lib: $(addsuffix .obj, $(basename $(wildcard $(SRC_DIR)/core/*.asm))) | $(LIB_DIR)
 	cocas -m -o $@ $^
