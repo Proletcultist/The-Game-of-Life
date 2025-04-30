@@ -57,7 +57,7 @@ strncmp>
     ldi r4, 0
     rts
 
-#r0 - pointer for line
+#r0 - pointer for buffer
 readUInt>
     ldb r0, r1
     
@@ -130,6 +130,7 @@ readUInt>
         rts
     fiInBound
 
+#r0 - pointer for buffer
 readRules>
     clr r2
     clr r5
