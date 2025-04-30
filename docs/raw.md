@@ -275,6 +275,22 @@ Functions:
 
 ## Interrupt handlers
 ## Main section
+
+```
+rsect main
+
+main>
+	ei
+
+	w:
+	wait
+	br w
+
+	rts
+
+end
+```
+
 ## Commands list
 
 1. `h` - print help message
