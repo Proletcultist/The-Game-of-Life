@@ -40,13 +40,13 @@ parse>
             #print error "incorrect input"
             ldi r0, error_inc_inp
             jsr writeToUART
+
+            ldi r0, str_help_h
+            jsr writeToUART
             rts
         fi
 
         ldi r0, str_help_txt
-        jsr writeToUART
-
-        ldi r0, str_succ
         jsr writeToUART
         rts
     fi
@@ -69,6 +69,8 @@ parse>
         if
             cmp r1, -1
         is eq
+            ldi r0, str_help_set1
+            jsr writeToUART
             rts
         fi
         move r1, r3
@@ -79,6 +81,8 @@ parse>
         if
             cmp r1, -1
         is eq
+            ldi r0, str_help_set1
+            jsr writeToUART
             rts
         fi
         move r1, r5
@@ -98,6 +102,9 @@ parse>
                 ldi r0, error_inc_inp
                 jsr writeToUART
             fiInBound
+
+            ldi r0, str_help_set1
+            jsr writeToUART
             rts
         fi
 
@@ -128,6 +135,8 @@ parse>
         if
             cmp r1, -1
         is eq
+            ldi r0, str_help_set0
+            jsr writeToUART
             rts
         fi
         move r1, r3
@@ -138,6 +147,8 @@ parse>
         if
             cmp r1, -1
         is eq
+            ldi r0, str_help_set0
+            jsr writeToUART
             rts
         fi
         move r1, r5
@@ -157,12 +168,322 @@ parse>
                 ldi r0, error_inc_inp
                 jsr writeToUART
             fiInBound
+
+            ldi r0, str_help_set0
+            jsr writeToUART
             rts
         fi
 
         move r3, r0
         move r5, r1
         jsr setTo0
+
+        ldi r0, str_succ
+        jsr writeToUART
+        rts
+    fi
+
+
+     #setRectTo1
+    ldi r0, buf
+    jsr skipSpaces
+
+	ldi r1, str_srect1
+	ldi r4, 2
+	jsr strncmp
+
+    jsr skipSpaces
+
+    if
+        cmp r4, 1
+    is eq
+        jsr readUInt
+        if
+            cmp r1, -1
+        is eq
+            ldi r0, str_help_srect1
+            jsr writeToUART
+            rts
+        fi
+        move r1, r3
+
+        jsr skipSpaces
+
+        jsr readUInt
+        if
+            cmp r1, -1
+        is eq
+            ldi r0, str_help_srect1
+            jsr writeToUART
+            rts
+        fi
+        move r1, r4
+
+        jsr skipSpaces
+
+        jsr readUInt
+        if
+            cmp r1, -1
+        is eq
+            ldi r0, str_help_srect1
+            jsr writeToUART
+            rts
+        fi
+        move r1, r5
+
+        jsr skipSpaces
+
+        jsr readUInt
+        if
+            cmp r1, -1
+        is eq
+            ldi r0, str_help_srect1
+            jsr writeToUART
+            rts
+        fi
+        move r1, r6
+
+        jsr skipSpaces
+
+        ldb r0, r1
+        if
+            cmp r1, 0
+        is ne
+            isInBound 48, r1, 57
+                #print error "too many args"
+                ldi r0, error_many_args
+                jsr writeToUART
+            notInBound
+                #print error "incorrect input"
+                ldi r0, error_inc_inp
+                jsr writeToUART
+            fiInBound
+
+            ldi r0, str_help_srect1
+            jsr writeToUART
+            rts
+        fi
+
+        move r3, r0
+        move r4, r1
+        move r5, r2
+        move r6, r3
+        if
+            cmp r0, r2
+        is hi
+            ldi r0, error_x_higher
+            jsr writeToUART
+
+            ldi r0, str_help_srect1
+            jsr writeToUART
+            rts
+        fi
+        if
+            cmp r1, r3
+        is hi
+            ldi r0, error_y_higher
+            jsr writeToUART
+
+            ldi r0, str_help_srect1
+            jsr writeToUART
+            rts
+        fi
+        jsr setRectTo1
+
+        ldi r0, str_succ
+        jsr writeToUART
+        rts
+    fi
+
+
+    #setRectTo0
+    ldi r0, buf
+    jsr skipSpaces
+
+	ldi r1, str_srect0
+	ldi r4, 2
+	jsr strncmp
+
+    jsr skipSpaces
+
+    if
+        cmp r4, 1
+    is eq
+        jsr readUInt
+        if
+            cmp r1, -1
+        is eq
+            ldi r0, str_help_srect0
+            jsr writeToUART
+            rts
+        fi
+        move r1, r3
+
+        jsr skipSpaces
+
+        jsr readUInt
+        if
+            cmp r1, -1
+        is eq
+            ldi r0, str_help_srect0
+            jsr writeToUART
+            rts
+        fi
+        move r1, r4
+
+        jsr skipSpaces
+
+        jsr readUInt
+        if
+            cmp r1, -1
+        is eq
+            ldi r0, str_help_srect0
+            jsr writeToUART
+            rts
+        fi
+        move r1, r5
+
+        jsr skipSpaces
+
+        jsr readUInt
+        if
+            cmp r1, -1
+        is eq
+            ldi r0, str_help_srect0
+            jsr writeToUART
+            rts
+        fi
+        move r1, r6
+
+        jsr skipSpaces
+
+        ldb r0, r1
+        if
+            cmp r1, 0
+        is ne
+            isInBound 48, r1, 57
+                #print error "too many args"
+                ldi r0, error_many_args
+                jsr writeToUART
+            notInBound
+                #print error "incorrect input"
+                ldi r0, error_inc_inp
+                jsr writeToUART
+            fiInBound
+
+            ldi r0, str_help_srect0
+            jsr writeToUART
+            rts
+        fi
+
+        move r3, r0
+        move r4, r1
+        move r5, r2
+        move r6, r3
+        if
+            cmp r0, r2
+        is hi
+            ldi r0, error_x_higher
+            jsr writeToUART
+
+            ldi r0, str_help_srect0
+            jsr writeToUART
+            rts
+        fi
+        if
+            cmp r1, r3
+        is hi
+            ldi r0, error_y_higher
+            jsr writeToUART
+
+            ldi r0, str_help_srect0
+            jsr writeToUART
+            rts
+        fi
+        jsr setRectTo0
+
+        ldi r0, str_succ
+        jsr writeToUART
+        rts
+    fi
+
+
+    #clear
+    ldi r0, buf
+    jsr skipSpaces
+
+    ldi r1, str_clr
+	ldi r4, 3
+	jsr strncmp
+
+    jsr skipSpaces
+
+    if
+        cmp r4, 1
+    is eq
+        ldb r0, r1
+        if
+            cmp r1, 0
+        is ne
+            #print error "incorrect input"
+            ldi r0, error_inc_inp
+            jsr writeToUART
+
+            ldi r0, str_help_clr
+            jsr writeToUART
+            rts
+        fi
+
+        jsr clear
+
+        ldi r0, str_succ
+        jsr writeToUART
+        rts
+    fi
+
+
+    #setRules
+    ldi r0, buf
+    jsr skipSpaces
+
+    ldi r1, str_rules
+	ldi r4, 5
+	jsr strncmp
+
+    jsr skipSpaces
+
+    if
+        cmp r4, 1
+    is eq
+        jsr readRules
+        if
+            cmp r1, -1
+        is eq
+            ldi r0, str_help_rules
+            jsr writeToUART
+            rts
+        fi
+
+        jsr skipSpaces
+
+        ldb r0, r1
+        if
+            cmp r1, 0
+        is ne
+            #print error "incorrect input"
+            ldi r0, error_inc_inp
+            jsr writeToUART
+
+            ldi r0, str_help_rules
+            jsr writeToUART
+            rts
+        fi
+
+        move r2, r0
+        jsr setSurv
+
+        move r5, r0
+        jsr setBorn
 
         ldi r0, str_succ
         jsr writeToUART
@@ -190,54 +511,13 @@ parse>
             #print error "incorrect input"
             ldi r0, error_inc_inp
             jsr writeToUART
-            rts
-        fi
 
-        jsr startGame
-
-        ldi r0, str_succ
-        jsr writeToUART
-        rts
-    fi
-
-
-    #setRules
-    ldi r0, buf
-    jsr skipSpaces
-
-    ldi r1, str_rules
-	ldi r4, 5
-	jsr strncmp
-
-    jsr skipSpaces
-
-    if
-        cmp r4, 1
-    is eq
-        jsr readRules
-        if
-            cmp r1, -1
-        is eq
-            rts
-        fi
-
-        jsr skipSpaces
-
-        ldb r0, r1
-        if
-            cmp r1, 0
-        is ne
-            #print error "incorrect input"
-            ldi r0, error_inc_inp
+            ldi r0, str_help_play
             jsr writeToUART
             rts
         fi
 
-        move r2, r0
-        jsr setSurv
-
-        move r5, r0
-        jsr setBorn
+        jsr startGame
 
         ldi r0, str_succ
         jsr writeToUART
@@ -265,69 +545,13 @@ parse>
             #print error "incorrect input"
             ldi r0, error_inc_inp
             jsr writeToUART
+
+            ldi r0, str_help_pause
+            jsr writeToUART
             rts
         fi
 
         jsr pauseGame
-
-        ldi r0, str_succ
-        jsr writeToUART
-        rts
-    fi
-
-
-    #invert
-    ldi r0, buf
-    jsr skipSpaces
-
-	ldi r1, str_inv
-	ldi r4, 1
-	jsr strncmp
-
-    jsr skipSpaces
-
-    if
-        cmp r4, 1
-    is eq
-        jsr readUInt
-        if
-            cmp r1, -1
-        is eq
-            rts
-        fi
-        move r1, r3
-
-        jsr skipSpaces
-
-        jsr readUInt
-        if
-            cmp r1, -1
-        is eq
-            rts
-        fi
-        move r1, r5
-
-        jsr skipSpaces
-
-        ldb r0, r1
-        if
-            cmp r1, 0
-        is ne
-            isInBound 48, r1, 57
-                #print error "too many args"
-                ldi r0, error_many_args
-                jsr writeToUART
-            notInBound
-                #print error "incorrect input"
-                ldi r0, error_inc_inp
-                jsr writeToUART
-            fiInBound
-            rts
-        fi
-
-        move r3, r0
-        move r5, r1
-        jsr invert
 
         ldi r0, str_succ
         jsr writeToUART
@@ -354,6 +578,9 @@ parse>
         is ne
             #print error "incorrect input"
             ldi r0, error_inc_inp
+            jsr writeToUART
+
+            ldi r0, str_help_step
             jsr writeToUART
             rts
         fi
@@ -386,6 +613,9 @@ parse>
             #print error "incorrect input"
             ldi r0, error_inc_inp
             jsr writeToUART
+
+            ldi r0, str_help_su
+            jsr writeToUART
             rts
         fi
 
@@ -417,6 +647,9 @@ parse>
             #print error "incorrect input"
             ldi r0, error_inc_inp
             jsr writeToUART
+
+            ldi r0, str_help_sd
+            jsr writeToUART
             rts
         fi
 
@@ -445,9 +678,21 @@ parse>
         if
             cmp r1, -1
         is eq
+            ldi r0, str_help_ss
+            jsr writeToUART
             rts
         fi
-        move r1, r2
+        isInBound 0, r1, 3
+            move r1, r2
+        notInBound
+            #print error "too large num"
+            ldi r0, error_large_arg
+            jsr writeToUART
+
+            ldi r0, str_help_ss
+            jsr writeToUART
+            rts
+        fiInBound
 
         jsr skipSpaces
 
@@ -464,6 +709,9 @@ parse>
                 ldi r0, error_inc_inp
                 jsr writeToUART
             fiInBound
+
+            ldi r0, str_help_ss
+            jsr writeToUART
             rts
         fi
 
@@ -476,43 +724,12 @@ parse>
     fi
 
 
-    #clear
+    #invert
     ldi r0, buf
     jsr skipSpaces
 
-    ldi r1, str_clr
-	ldi r4, 3
-	jsr strncmp
-
-    jsr skipSpaces
-
-    if
-        cmp r4, 1
-    is eq
-        ldb r0, r1
-        if
-            cmp r1, 0
-        is ne
-            #print error "incorrect input"
-            ldi r0, error_inc_inp
-            jsr writeToUART
-            rts
-        fi
-
-        jsr clear
-
-        ldi r0, str_succ
-        jsr writeToUART
-        rts
-    fi
-
-
-    #setRectTo1
-    ldi r0, buf
-    jsr skipSpaces
-
-	ldi r1, str_srect1
-	ldi r4, 2
+	ldi r1, str_inv
+	ldi r4, 1
 	jsr strncmp
 
     jsr skipSpaces
@@ -524,6 +741,8 @@ parse>
         if
             cmp r1, -1
         is eq
+            ldi r0, str_help_inv
+            jsr writeToUART
             rts
         fi
         move r1, r3
@@ -534,29 +753,11 @@ parse>
         if
             cmp r1, -1
         is eq
-            rts
-        fi
-        move r1, r4
-
-        jsr skipSpaces
-
-        jsr readUInt
-        if
-            cmp r1, -1
-        is eq
+            ldi r0, str_help_inv
+            jsr writeToUART
             rts
         fi
         move r1, r5
-
-        jsr skipSpaces
-
-        jsr readUInt
-        if
-            cmp r1, -1
-        is eq
-            rts
-        fi
-        move r1, r6
 
         jsr skipSpaces
 
@@ -573,123 +774,15 @@ parse>
                 ldi r0, error_inc_inp
                 jsr writeToUART
             fiInBound
+
+            ldi r0, str_help_inv
+            jsr writeToUART
             rts
         fi
 
         move r3, r0
-        move r4, r1
-        move r5, r2
-        move r6, r3
-        if
-            cmp r0, r2
-        is hi
-            ldi r0, error_x_higher
-            jsr writeToUART
-            rts
-        fi
-        if
-            cmp r1, r3
-        is hi
-            ldi r0, error_y_higher
-            jsr writeToUART
-            rts
-        fi
-        jsr setRectTo1
-
-        ldi r0, str_succ
-        jsr writeToUART
-        rts
-    fi
-
-
-    #setRectTo0
-    ldi r0, buf
-    jsr skipSpaces
-
-	ldi r1, str_srect0
-	ldi r4, 2
-	jsr strncmp
-
-    jsr skipSpaces
-
-    if
-        cmp r4, 1
-    is eq
-        jsr readUInt
-        if
-            cmp r1, -1
-        is eq
-            rts
-        fi
-        move r1, r3
-
-        jsr skipSpaces
-
-        jsr readUInt
-        if
-            cmp r1, -1
-        is eq
-            rts
-        fi
-        move r1, r4
-
-        jsr skipSpaces
-
-        jsr readUInt
-        if
-            cmp r1, -1
-        is eq
-            rts
-        fi
-        move r1, r5
-
-        jsr skipSpaces
-
-        jsr readUInt
-        if
-            cmp r1, -1
-        is eq
-            rts
-        fi
-        move r1, r6
-
-        jsr skipSpaces
-
-        ldb r0, r1
-        if
-            cmp r1, 0
-        is ne
-            isInBound 48, r1, 57
-                #print error "too many args"
-                ldi r0, error_many_args
-                jsr writeToUART
-            notInBound
-                #print error "incorrect input"
-                ldi r0, error_inc_inp
-                jsr writeToUART
-            fiInBound
-            rts
-        fi
-
-        move r3, r0
-        move r4, r1
-        move r5, r2
-        move r6, r3
-        if
-            cmp r0, r2
-        is hi
-            ldi r0, error_x_higher
-            jsr writeToUART
-            rts
-        fi
-        if
-            cmp r1, r3
-        is hi
-            ldi r0, error_y_higher
-            jsr writeToUART
-            rts
-        fi
-        jsr setRectTo0
+        move r5, r1
+        jsr invert
 
         ldi r0, str_succ
         jsr writeToUART
@@ -714,6 +807,8 @@ parse>
         if
             cmp r1, -1
         is eq
+            ldi r0, str_help_savex
+            jsr writeToUART
             rts
         fi
         isInBound 0, r1, 4
@@ -721,6 +816,9 @@ parse>
         notInBound
             #print error "too large num"
             ldi r0, error_large_num
+            jsr writeToUART
+
+            ldi r0, str_help_savex
             jsr writeToUART
             rts
         fiInBound
@@ -731,6 +829,8 @@ parse>
         if
             cmp r1, -1
         is eq
+            ldi r0, str_help_savex
+            jsr writeToUART
             rts
         fi
         move r1, r4
@@ -741,6 +841,8 @@ parse>
         if
             cmp r1, -1
         is eq
+            ldi r0, str_help_savex
+            jsr writeToUART
             rts
         fi
         move r1, r5
@@ -751,6 +853,8 @@ parse>
         if
             cmp r1, -1
         is eq
+            ldi r0, str_help_savex
+            jsr writeToUART
             rts
         fi
         move r1, r6
@@ -761,6 +865,8 @@ parse>
         if
             cmp r1, -1
         is eq
+            ldi r0, str_help_savex
+            jsr writeToUART
             rts
         fi
         move r1, r7
@@ -780,6 +886,9 @@ parse>
                 ldi r0, error_inc_inp
                 jsr writeToUART
             fiInBound
+
+            ldi r0, str_help_savex
+            jsr writeToUART
             rts
         fi
 
@@ -793,12 +902,18 @@ parse>
         is hi
             ldi r0, error_x_higher
             jsr writeToUART
+
+            ldi r0, str_help_savex
+            jsr writeToUART
             rts
         fi
         if
             cmp r2, r4
         is hi
             ldi r0, error_y_higher
+            jsr writeToUART
+
+            ldi r0, str_help_savex
             jsr writeToUART
             rts
         fi
@@ -827,6 +942,8 @@ parse>
         if
             cmp r1, -1
         is eq
+            ldi r0, str_help_loadx
+            jsr writeToUART
             rts
         fi
         isInBound 0, r1, 4
@@ -834,6 +951,9 @@ parse>
         notInBound
             #print error "too large num"
             ldi r0, error_large_num
+            jsr writeToUART
+
+            ldi r0, str_help_loadx
             jsr writeToUART
             rts
         fiInBound
@@ -844,6 +964,8 @@ parse>
         if
             cmp r1, -1
         is eq
+            ldi r0, str_help_loadx
+            jsr writeToUART
             rts
         fi
         move r1, r4
@@ -854,6 +976,8 @@ parse>
         if
             cmp r1, -1
         is eq
+            ldi r0, str_help_loadx
+            jsr writeToUART
             rts
         fi
         move r1, r5
@@ -873,6 +997,9 @@ parse>
                 ldi r0, error_inc_inp
                 jsr writeToUART
             fiInBound
+
+            ldi r0, str_help_loadx
+            jsr writeToUART
             rts
         fi
 
@@ -881,11 +1008,13 @@ parse>
         move r5, r2
         jsr insertTemplate
 
-	if
-		cmp r2, -1
-	is eq
-		rts
-	fi
+        if
+            cmp r2, -1
+        is eq
+            ldi r0, str_help_loadx
+            jsr writeToUART
+            rts
+        fi
 
         ldi r0, str_succ
         jsr writeToUART
@@ -895,6 +1024,9 @@ parse>
 
     #print error "incorrect command"
     ldi r0, error_inc_com
+    jsr writeToUART
+
+    ldi r0, str_help_inc_com
     jsr writeToUART
     rts
 
