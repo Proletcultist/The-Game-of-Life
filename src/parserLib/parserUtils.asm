@@ -130,16 +130,6 @@ readUInt>
         rts
     fiInBound
 
-#r0 - pointer for UART buf
-freeUART>
-    ldb r0, r1
-    while
-        cmp r1, 10
-    stays ne
-        ldb r0, r1
-    wend
-    rts
-
 readRules>
     clr r2
     clr r5
