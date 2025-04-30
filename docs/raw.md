@@ -260,6 +260,19 @@ Template structure:
 	- bits 5 - 9 - height
 - following 64 words - template
 
+## UART Library
+
+Functions:
+
+1. **readFromUART**
+ - Reads string from UART buffer. Maximum string size - 30 chars.
+2. **writeToUART**
+ - Arguments: r0 - pointer to string
+ - Writes string to UART buffer
+3. **freeUART**
+ - Arguments: r0 - pointer to UART buffer
+ - Frees UART buffer
+
 ## Interrupt handlers
 ## Main section
 ## Commands list
