@@ -243,11 +243,17 @@ This simple circuit stays for regulating speed of game. When game is running it 
 	\item Through counter which generates impulse every 8 ticks
 \end{itemize}
 
-\subsection*{Status register}
+\subsection*{Status registers}
 \addcontentsline{toc}{subsection}{Status register}
+
+There are two status registers, both of them is conneted to I/O data bus, I/O address bus, rd/wr signal and I/O sel signal (which indicates if processor access I/O address space or not). Reading and writing to this registers can be done with store/load operations of processor with specified addresses. Every writing to this registers will cause reset of game processor counter (see Game processor).
+
+All rules (described here) go from this registers straight to game processor or speed controller.
 
 \subsection*{One iteration trigger}
 \addcontentsline{toc}{subsection}{One iteration trigger}
+
+For triggering single game iteration SR trigger is used. When its value is 1, it raises \textbf{play} signal for game processor. Setting this trigger to 1 can be triggered by accessing specified address. It will be set to 0 automatically, when game processor calculate new state and matrix buffer latch this new state.
 
 \section*{UART controller}
 \addcontentsline{toc}{section}{UART controller}

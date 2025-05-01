@@ -10,6 +10,7 @@
 	\item 0xfc56 - 0xfee0 - templates array 
 	\item 0xfee1 - 0xfeff - input buffer 
 	\item 0xff00-0xffff - I/O devices address space \begin{itemize}
+		\item 0xff74 - address for trigerrinh clearing of field
 		\item 0xff76 - address for triggering one game tick
 		\item 0xff78 - address for controlling of interrupts throwing from UART controller
 		\item 0xff7a - UART controller (for reading and writing data via UART) 
@@ -165,6 +166,7 @@ Template structure:
 	\item \textsf{S0 $x_{1}$ $y_{1}$ $x_{2}$ $y_{2}$} -  Sets all cells in rectangle with upper left corner ($x_{1}$, $y_{1}$) and lower right corner ($x_{2}$, $y_{2}$) to dead status
 	\item \textsf{save $n$ $x_{1}$ $y_{1}$ $x_{2}$ $y_{2}$} - Save all cells in rectangle with upper left corner ($x_{1}$, $y_{1}$) and lower right corner ($x_{2}$, $y_{2}$) to slot number $n$.
 	\item \textsf{load $n$ $x$ $y$} - Copy all cells from slot $n$ to rectangle with upper left corner ($x_{1}$, $y_{1}$)
+	\item \textsf{clr} - clear game field.
 \end{enumerate}
 
 \section*{Commands parsing}
