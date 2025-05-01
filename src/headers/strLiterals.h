@@ -12,8 +12,8 @@ str_clr: ext
 str_srect1: ext
 str_srect0: ext
 str_help: ext
-str_savex: ext
-str_loadx: ext
+str_save: ext
+str_load: ext
 str_input: ext
 str_help_txt: ext
 str_succ: ext
@@ -47,6 +47,6 @@ str_help_su: ext
 str_help_sd: ext
 str_help_ss: ext
 str_help_inv: ext
-str_help_savex: ext
-str_help_loadx: ext
+str_help_save: ext
+str_help_load: ext
 str_help_inc_com: ext

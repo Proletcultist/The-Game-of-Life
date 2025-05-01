@@ -794,8 +794,8 @@ parse>
     ldi r0, buf
     jsr skipSpaces
 
-	ldi r1, str_savex
-	ldi r4, 5
+	ldi r1, str_save
+	ldi r4, 4
 	jsr strncmp
 
     jsr skipSpaces
@@ -807,7 +807,7 @@ parse>
         if
             cmp r1, -1
         is eq
-            ldi r0, str_help_savex
+            ldi r0, str_help_save
             jsr writeToUART
             rts
         fi
@@ -818,7 +818,7 @@ parse>
             ldi r0, error_large_num
             jsr writeToUART
 
-            ldi r0, str_help_savex
+            ldi r0, str_help_save
             jsr writeToUART
             rts
         fiInBound
@@ -829,7 +829,7 @@ parse>
         if
             cmp r1, -1
         is eq
-            ldi r0, str_help_savex
+            ldi r0, str_help_save
             jsr writeToUART
             rts
         fi
@@ -841,7 +841,7 @@ parse>
         if
             cmp r1, -1
         is eq
-            ldi r0, str_help_savex
+            ldi r0, str_help_save
             jsr writeToUART
             rts
         fi
@@ -853,7 +853,7 @@ parse>
         if
             cmp r1, -1
         is eq
-            ldi r0, str_help_savex
+            ldi r0, str_help_save
             jsr writeToUART
             rts
         fi
@@ -865,7 +865,7 @@ parse>
         if
             cmp r1, -1
         is eq
-            ldi r0, str_help_savex
+            ldi r0, str_help_save
             jsr writeToUART
             rts
         fi
@@ -887,7 +887,7 @@ parse>
                 jsr writeToUART
             fiInBound
 
-            ldi r0, str_help_savex
+            ldi r0, str_help_save
             jsr writeToUART
             rts
         fi
@@ -903,7 +903,7 @@ parse>
             ldi r0, error_x_higher
             jsr writeToUART
 
-            ldi r0, str_help_savex
+            ldi r0, str_help_save
             jsr writeToUART
             rts
         fi
@@ -913,7 +913,7 @@ parse>
             ldi r0, error_y_higher
             jsr writeToUART
 
-            ldi r0, str_help_savex
+            ldi r0, str_help_save
             jsr writeToUART
             rts
         fi
@@ -929,8 +929,8 @@ parse>
     ldi r0, buf
     jsr skipSpaces
 
-	ldi r1, str_loadx
-	ldi r4, 5
+	ldi r1, str_load
+	ldi r4, 4
 	jsr strncmp
 
     jsr skipSpaces
@@ -942,7 +942,7 @@ parse>
         if
             cmp r1, -1
         is eq
-            ldi r0, str_help_loadx
+            ldi r0, str_help_load
             jsr writeToUART
             rts
         fi
@@ -953,7 +953,7 @@ parse>
             ldi r0, error_large_num
             jsr writeToUART
 
-            ldi r0, str_help_loadx
+            ldi r0, str_help_load
             jsr writeToUART
             rts
         fiInBound
@@ -964,7 +964,7 @@ parse>
         if
             cmp r1, -1
         is eq
-            ldi r0, str_help_loadx
+            ldi r0, str_help_load
             jsr writeToUART
             rts
         fi
@@ -976,7 +976,7 @@ parse>
         if
             cmp r1, -1
         is eq
-            ldi r0, str_help_loadx
+            ldi r0, str_help_load
             jsr writeToUART
             rts
         fi
@@ -998,7 +998,7 @@ parse>
                 jsr writeToUART
             fiInBound
 
-            ldi r0, str_help_loadx
+            ldi r0, str_help_load
             jsr writeToUART
             rts
         fi
@@ -1011,7 +1011,7 @@ parse>
         if
             cmp r2, -1
         is eq
-            ldi r0, str_help_loadx
+            ldi r0, str_help_load
             jsr writeToUART
             rts
         fi
