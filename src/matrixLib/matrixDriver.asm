@@ -6,6 +6,8 @@ asect 0xff7c
 state2:
 asect 0xff76
 stepaddres:
+asect 0xff74
+clearaddres:
 
 # Section with matrix driver functions
 rsect matrixDriver
@@ -290,19 +292,16 @@ setBorn>
 	rts
 
 clear>
-	ldi r0, state2
-	ldw r0, r1
-	ldi r2, 0b0000010000000000
-	or r2, r1
+	ldi r0, clearaddres
 	
-	stw r0, r1 
+	stw r0, r0 
 
 	rts
 
 speedDown>
 	ldi r0, state2
 	ldw r0, r1
-	ldi r2, 0b0000100000000000
+	ldi r2, 0b0000010000000000
 	add r2, r1 			# Assume, what there is no significant data after 12th bit
 	
 	stw r0, r1	
@@ -311,7 +310,7 @@ speedDown>
 speedUp>
 	ldi r0, state2
 	ldw r0, r1
-	ldi r2, 0b1111100000000000
+	ldi r2, 0b1111110000000000
 	add r2, r1 			# Assume, what there is no significant data after 12th bit
 	
 	stw r0, r1	
@@ -323,10 +322,9 @@ setSpeed>
 	ldi r1, state2
 	ldw r1, r2
 
-	ldi r3, 0b1110011111111111
+	ldi r3, 0b1111001111111111
 	and r3, r2
 
-	shl r0	
 	shl r0	
 	shl r0	
 	shl r0	
