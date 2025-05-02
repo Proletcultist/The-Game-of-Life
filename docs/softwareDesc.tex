@@ -58,12 +58,12 @@ main>
 end
 \end{lstlisting}
 
-Main function simply enables interrupts and stay in infinite loop with wait in order to wait for interrupr, process it and then return into wait status.
+Main function simply enables interrupts and stay in infinite loop with wait in order to wait for interrupt, process it and then return into wait status.
 
 \section*{Matrix driver}
 \addcontentsline{toc}{section}{Matrix driver}
 
-Functions:
+Matrix driver is a library, which implements functions, allowing abstraction from low-level interactions with matrix controller. This library has following functions:
 
 \begin{enumerate}
 	\item setTo1
@@ -161,6 +161,10 @@ Template structure:
 
 \section*{Parser library}
 \addcontentsline{toc}{section}{Parser library}
+
+Parser library implements function for parsing command line, stored in input buffer in memory, and util functions, helping do this. This function gets command, its arguments, checks all of this for errors, if there is any error, function print meaningful error message, otherwise it calls appropriate function from matrix driver with parsed arguments.
+
+Utilities:
 
 \begin{enumerate}
 	\item \textbf{skipSpaces}
