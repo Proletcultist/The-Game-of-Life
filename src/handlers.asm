@@ -18,6 +18,12 @@ helloPrint>
 getLine>
 	jsr readFromUART
 
+	if 
+		cmp r0, -1
+	is eq
+		rti
+	fi
+
 	jsr parse
 
 	ldi r0, str_input

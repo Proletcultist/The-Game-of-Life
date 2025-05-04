@@ -33,7 +33,9 @@ readFromUART>
 
 			ldi r0, str_input
 			jsr writeToUART
-            rti
+
+			ldi r0, -1
+		    rts
         fi
 		stb r1, r2
 		ldb r0, r2
