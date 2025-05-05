@@ -155,6 +155,24 @@ All rules (described here) go from this registers straight to game processor or 
 
 For triggering single game iteration SR trigger is used. When its value is 1, it raises \textbf{play} signal for game processor. Setting this trigger to 1 can be triggered by accessing specified address. It will be set to 0 automatically, when game processor calculate new state and matrix buffer latch this new state.
 
+\section*{Speed controller}
+\addcontentsline{toc}{section}{Speed controller}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.5]{speedController}
+	\caption{Speed controller}
+\end{figure}
+
+This simple circuit stays for regulating speed of game. When game is running it will choose the way, through which clock will go depends on speed input:
+
+\begin{itemize}
+	\item Directly 
+	\item Through counter, which (with rising edge detector, connected to carry output of counter) generates impulse every 2 ticks
+	\item Through counter, which generates impulse every 4 ticks
+	\item Through counter which generates impulse every 8 ticks
+\end{itemize}
+
 \section*{UART controller}
 \addcontentsline{toc}{section}{UART controller}
 
