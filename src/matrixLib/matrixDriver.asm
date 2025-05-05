@@ -383,4 +383,16 @@ invert>
 
 	rts
 
+# Outputs: r0 - surv, r1 - born
+getRules>
+	ldi r1, state2
+	ldw r1, r1
+	ldi r0, 0b0000000111111111
+	and r1, r0, r1
+
+	ldi r0, state1
+	ldw r0, r0
+
+	rts
+	
 end

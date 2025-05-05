@@ -14,3 +14,4 @@ stepOnce: ext
 insertTemplate: ext
 saveTemplate: ext
 invert: ext
+getRules: ext
