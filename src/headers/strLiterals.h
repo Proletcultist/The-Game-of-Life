@@ -18,6 +18,7 @@ str_input: ext
 str_help_txt: ext
 str_succ: ext
 str_hello: ext
+info_rules_are_zero: ext
 error_large_coord: ext
 error_inc_inp: ext
 error_few_args: ext

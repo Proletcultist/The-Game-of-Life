@@ -7,6 +7,7 @@ include matrixLib.h
 include parserUtils.h
 include strLiterals.h
 writeToUART: ext
+uart: ext
 
 parse>
     ldi r0, buf
@@ -455,6 +456,72 @@ parse>
     if
         cmp r4, 1
     is eq
+	if 
+            ldb r0, r4
+	    tst r4
+	is z
+            jsr getRules
+
+	    if 
+		tst r0
+	    is z
+		if 
+			tst r1
+		is z
+			ldi r0, info_rules_are_zero
+			jsr writeToUART
+			rts
+		fi
+	    fi
+
+            # print rules
+            ldi r5, uart
+            ldi r6, 0x0D	# CR
+            stb r5, r6
+            ldi r6, 0x0A	# LF
+            stb r5, r6
+	    ldi r6, 0x53	# 'S'
+	    stb r5, r6
+
+	    ldi r2, 0x30	# '0'
+            while
+            	tst r0
+	    stays nz 
+           	if
+			shr r0
+		is cs
+			stb r5, r2		
+		fi 
+		inc r2
+	    wend
+
+	    ldi r6, 0x42	# 'B'
+	    stb r5, r6
+
+	    ldi r0, 0x30	# '0'
+	    while 
+		tst r1
+	    stays nz
+		if 
+			shr r1
+		is cs
+			stb r5, r0
+		fi
+		inc r0
+	    wend
+
+            ldi r6, 0x0D	# CR
+            stb r5, r6
+            ldi r6, 0x0A	# LF
+            stb r5, r6
+            ldi r6, 0x0D	# CR
+            stb r5, r6
+            ldi r6, 0x0A	# LF
+            stb r5, r6
+
+            rts
+        fi
+
         jsr readRules
         if
             cmp r1, -1
