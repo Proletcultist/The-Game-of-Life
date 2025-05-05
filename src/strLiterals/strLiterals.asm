@@ -20,6 +20,7 @@ str_help> dc "h\0"
 str_input> dc ">\0"
 str_succ> dc "\r\n\033[32mSuccessful\033[0m\r\n\r\n\0"
 
+info_rules_are_zero> dc "\r\nRules are all zero\r\n\r\n\0"
 error_large_coord> dc "\r\n\033[31mERROR\033[0m: Too large coordinate!\r\n\r\n\0"
 error_inc_inp> dc "\r\n\033[31mERROR\033[0m: Incorrect input!\r\n\r\n\0"
 error_few_args> dc "\r\n\033[31mERROR\033[0m: Too few arguments!\r\n\r\n\0"
