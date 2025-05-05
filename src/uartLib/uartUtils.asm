@@ -1,5 +1,5 @@
 asect 0xff7a
-uart:
+uart>
 
 asect 0xfee1
 buf: ds 31
