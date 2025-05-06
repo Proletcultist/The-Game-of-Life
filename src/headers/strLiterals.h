@@ -18,6 +18,7 @@ str_input: ext
 str_help_txt: ext
 str_succ: ext
 str_hello: ext
+str_getTemplates: ext
 info_rules_are_zero: ext
 error_large_coord: ext
 error_inc_inp: ext
@@ -51,3 +52,4 @@ str_help_inv: ext
 str_help_save: ext
 str_help_load: ext
 str_help_inc_com: ext
+str_help_getTemplates: ext

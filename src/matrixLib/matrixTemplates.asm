@@ -1,7 +1,7 @@
 asect 0xfc56
-templates:
+templates>
 # First initial template - glider
-dc 0b0000000001100011, 0b0100011110000000
+dc 0b0000000011000011, 0b0100011110000000
 align 0xfee0
 
 rsect matrixTemplates
@@ -49,9 +49,10 @@ insertTemplate>
 # r0 - first word of template, r1 - x, r2 - y, r3 - header
 	
 	move r3, r4
-	ldi r5, 0b0000000000011111	
+	ldi r5, 0b0000000000111111	
 	and r5, r3, r3
 
+	shr r4
 	shr r4
 	shr r4
 	shr r4
@@ -275,6 +276,7 @@ saveTemplate>
 	inc r5
 
 	shl r5	
+	shl r5
 	shl r5	
 	shl r5	
 	shl r5	

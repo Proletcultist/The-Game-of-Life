@@ -1088,6 +1088,36 @@ parse>
         rts
     fi
 
+    # getTemplates
+    ldi r0, buf
+    jsr skipSpaces
+
+    ldi r1, str_getTemplates
+	ldi r4, 12
+	jsr strncmp
+
+    jsr skipSpaces
+
+    if
+        cmp r4, 1
+    is eq
+        ldb r0, r1
+        if
+            cmp r1, 0
+        is ne
+            #print error "incorrect input"
+            ldi r0, error_inc_inp
+            jsr writeToUART
+
+            ldi r0, str_help_getTemplates
+            jsr writeToUART
+            rts
+        fi
+
+	jsr getTemplates
+        rts
+    fi
+
 
     #print error "incorrect command"
     ldi r0, error_inc_com

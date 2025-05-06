@@ -15,3 +15,4 @@ insertTemplate: ext
 saveTemplate: ext
 invert: ext
 getRules: ext
+getTemplates: ext

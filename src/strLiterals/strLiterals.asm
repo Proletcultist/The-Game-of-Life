@@ -16,6 +16,7 @@ str_srect0> dc "S0\0"
 str_save> dc "save\0"
 str_load> dc "load\0"
 str_help> dc "h\0"
+str_getTemplates> dc "getTemplates\0"
 
 str_input> dc ">\0"
 str_succ> dc "\r\n\033[32mSuccessful\033[0m\r\n\r\n\0"
@@ -55,6 +56,7 @@ str_help_save> dc "Example: save 0 0 0 1 1 - Save all cells in the rectangle fro
 str_help_load> dc "Example: load 0 0 0 - Load cells from slot 0 into the field with the upper-left corner at (0, 0).\r\n\r\n\0"
 str_help_clr> dc "Example: clr - Clear the entire game field.\r\n\r\n\0"
 str_help_inc_com> dc "Print \"h\" to find out the list of available commands.\r\n\r\n\0"
+str_help_getTemplates> dc "Example: getTemplates - get all templates\r\n\n\0"
 
 str_hello> dc "\033[1;37m        .....\r\n       :\033[1;35mMMMMM\033[1;37m:              \033[1;35mThe Game of Life by \033[1;37m24214/2 \033[1;35mver. \033[1;37m0.5\r\n       :\033[1;35mMMMMM\033[1;37m:              --------------------------------------\r\n       :\033[1;35mMMMMM\033[1;37m:.....         \033[1;35mDevelopers\033[1;37m:\r\n        `````:\033[1;35mMMMMM\033[1;37m:        \033[1;35m= \033[1;37mMatvey Zenin\r\n             :\033[1;35mMMMMM\033[1;37m:        \033[1;35m= \033[1;37mMichael Deshin\r\n  ..... .....:\033[1;35mMMMMM\033[1;37m:        \033[1;35m= \033[1;37mNikita Romanenko\r\n :\033[1;35mMMMMM\033[1;37m:\033[1;35mMMMMM\033[1;37m:\033[1;35mMMMMM\033[1;37m:\r\n :\033[1;35mMMMMM\033[1;37m:\033[1;35mMMMMM\033[1;37m:\033[1;35mMMMMM\033[1;37m:        \033[1;35mType \033[1;37m\"h\" \033[1;35mto see help information\r\n \033[1;37m:\033[1;35mMMMMM\033[1;37m:\033[1;35mMMMMM\033[1;37m:\033[1;35mMMMMM\033[1;37m:\r\n  ````` ````` `````         \033[1;35mNSU FIT \033[1;37m2025\033[0m\r\n\r\n>\0"
 
