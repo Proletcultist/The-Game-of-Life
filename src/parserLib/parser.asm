@@ -1118,6 +1118,71 @@ parse>
         rts
     fi
 
+    # toroidal
+    ldi r0, buf
+    jsr skipSpaces
+
+    ldi r1, str_toroidal
+	ldi r4, 8
+	jsr strncmp
+
+    jsr skipSpaces
+
+    if
+        cmp r4, 1
+    is eq
+        ldb r0, r1
+        if
+            cmp r1, 0
+        is ne
+            #print error "incorrect input"
+            ldi r0, error_inc_inp
+            jsr writeToUART
+
+            ldi r0, str_help_toroidal
+            jsr writeToUART
+            rts
+        fi
+
+	jsr setToroidalMode
+        ldi r0, str_succ
+        jsr writeToUART
+
+        rts
+    fi
+
+    # bounds
+    ldi r0, buf
+    jsr skipSpaces
+
+    ldi r1, str_bounds
+	ldi r4, 6
+	jsr strncmp
+
+    jsr skipSpaces
+
+    if
+        cmp r4, 1
+    is eq
+        ldb r0, r1
+        if
+            cmp r1, 0
+        is ne
+            #print error "incorrect input"
+            ldi r0, error_inc_inp
+            jsr writeToUART
+
+            ldi r0, str_help_bounds
+            jsr writeToUART
+            rts
+        fi
+
+	jsr setBoundsMode
+        ldi r0, str_succ
+        jsr writeToUART
+
+        rts
+    fi
 
     #print error "incorrect command"
     ldi r0, error_inc_com

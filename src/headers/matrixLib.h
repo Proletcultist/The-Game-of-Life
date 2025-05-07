@@ -16,3 +16,5 @@ saveTemplate: ext
 invert: ext
 getRules: ext
 getTemplates: ext
+setBoundsMode: ext
+setToroidalMode: ext

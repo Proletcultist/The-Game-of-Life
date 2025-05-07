@@ -395,6 +395,8 @@ getRules>
 
 	ldi r0, state1
 	ldw r0, r0
+	ldi r2, 0b0000000111111111
+	and r2, r0, r0
 
 	rts
 
@@ -501,6 +503,28 @@ while_start:
 		inc r6
 	wend
 while_end:
+
+	rts
+
+setBoundsMode>
+	ldi r0, state1
+	ldw r0, r1
+	ldi r2, 0b1111110111111111
+
+	and r2, r1, r1
+
+	stw r0, r1
+
+	rts
+
+setToroidalMode>
+	ldi r0, state1
+	ldw r0, r1
+	ldi r2, 0b0000001000000000
+
+	or r2, r1, r1
+
+	stw r0, r1
 
 	rts
 	
