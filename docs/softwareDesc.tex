@@ -22,6 +22,7 @@
 		\end{itemize}
 		\item 0xff7e - matrix controller state register №1 \begin{itemize}
 				\item Bits 0-8 - bit string, representing survive rule
+				\item Bit 9 - mode: 0 - bounds, 1 - toroidal
 		\end{itemize}
 		\item 0xff80-0xffff - game field (for reading and writing of current field state 16 bits at a time) 
 	\end{itemize}
@@ -150,6 +151,14 @@ Matrix driver is a library, which implements functions, allowing abstraction fro
 		\begin{itemize}
 			\item Print all saved templates using UART
 		\end{itemize}
+	\item setBoundsMode
+		\begin{itemize}
+			\item Sets mode to bounds
+		\end{itemize}
+	\item setToroidalMode
+		\begin{itemize}
+			\item Sets mode to toroidal
+		\end{itemize}
 \end{enumerate}
 
 \subsection*{Matrix templates}
@@ -271,4 +280,6 @@ Functions:
 	\item \textsf{load $n$ $x$ $y$} - Copy all cells from slot $n$ to rectangle with upper left corner ($x_{1}$, $y_{1}$)
 	\item \textsf{clr} - clear game field.
 	\item \textsf{getTemplates} - get all saved templates printed.
+	\item \textsf{bounds} - set mode to bounds
+	\item \textsf{toroidal} - set mode to toroidal
 \end{enumerate}

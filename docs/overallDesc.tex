@@ -10,6 +10,7 @@ Product implements the game of life cellular automaton with 32x32 game field and
 	\item \textbf{Born} - set of integers from 0 to 8, specifying, with what amounts of alive neighbours cell will become alive.
 	\item \textbf{Surv} - set of integers from 0 to 8, specifying, with what amounts of alive neighbours cell will survive.
 	\item \textbf{Speed} - integer from 0 to 3, specifying game speed.
+	\item \textbf{Mode} - \textbf{Bounds} mode (all cells around field considired as dead) or \textbf{Toroidal} mode (last row considered as row above first and vise versa, same for first and last column).
 \end{itemize}
 
 CdM-16 processor with single banked RAM chip forms heart of product, it processes user input, manages templates (some specified part of game field, stored in one of 5 slots) and handles errors.
