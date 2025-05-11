@@ -40,7 +40,7 @@ error_slot_is_empty> dc "\r\n\033[31mERROR\033[0m: Specified slot is empty!\r\n\
 error_template_too_big_x> dc "\r\n\033[31mERROR\033[0m: Template does not fit by width!\r\n\r\n\0"
 error_template_too_big_y> dc "\r\n\033[31mERROR\033[0m: Template does not fit by height!\r\n\r\n\0"
 
-str_help_txt> dc "\r\nAvailable commands:\r\n\r\nh - Print this help message.\r\n\r\ns1 x y - Set the cell at coordinates (x, y) to alive.\r\n\r\ns0 x y - Set the cell at coordinates (x, y) to dead.\r\n\r\ni x y - Invert the status of the cell at coordinates (x, y).\r\n\r\nplay - Start the game.\r\n\r\npause - Pause the game.\r\n\r\nstep - Perform one iteration of the game.\r\n\r\nrules S<digits>B<digits> - Set custom rules for the game. Example: rules S23B3\r\n\r\nsu - Speed up the game.\r\n\r\nsd - Slow down the game.\r\n\r\nss n - Set game speed to value n.\r\n\r\nS1 x1 y1 x2 y2 - Set all cells in the rectangle from (x1, y1) to (x2, y2) to alive.\r\n\r\nS0 x1 y1 x2 y2 - Set all cells in the rectangle from (x1, y1) to (x2, y2) to dead.\r\n\r\nsave n x1 y1 x2 y2 - Save all cells in the rectangle from (x1, y1) to (x2, y2) into slot number n.\r\n\r\nload n x y - Load cells from slot n into the field with the upper-left corner at (x, y).\r\n\r\nclr - Clear the entire game field.\r\n\r\n\0"
+str_help_txt> dc "\r\nAvailable commands:\r\n  h\r\n\tPrint this help message.\r\n  s1 x y\r\n\tSet the cell at coordinates (x, y) to alive.\r\n  s0 x y\r\n\tSet the cell at coordinates (x, y) to dead.\r\n  i x y\r\n\tInvert the status of the cell at coordinates (x, y).\r\n  play\r\n\tStart the game.\r\n  pause\r\n\tPause the game.\r\n  step\r\n\tPerform one iteration of the game.\r\n  rules S23B3\r\n\tSet rules S23B3 for the game. No arguments - print current rules.\r\n  su\r\n\tSpeed up the game.\r\n  sd\r\n\tSlow down the game.\r\n  ss n\r\n\tSet game speed to value n.\r\n  S1 x1 y1 x2 y2\r\n\tSet all cells in the rectangle from (x1, y1) to (x2, y2) to alive.\r\n  S0 x1 y1 x2 y2\r\n\tSet all cells in the rectangle from (x1, y1) to (x2, y2) to dead.\r\n  save n x1 y1 x2 y2\r\n\tSave all cells in the rectangle from (x1, y1) to (x2, y2) into slot number n.\r\n  load n x y\r\n\tLoad cells from slot n into the field with the upper-left corner at (x, y).\r\n  clr\r\n\tClear game field.\r\n  getTemplates\r\n\tGet all templates\r\n  bounds\r\n\tSet bounds mode\r\n  toroidal\r\n\tSet toroidal mode\r\n\r\n\0"
 str_help_h> dc "Example: h - Print help message.\r\n\r\n\0"
 str_help_set1> dc "Example: s1 0 0 - Set the cell at coordinates (0, 0) to alive.\r\n\r\n\0"
 str_help_set0> dc "Example: s0 0 0 - Set the cell at coordinates (0, 0) to dead.\r\n\r\n\0"
@@ -48,7 +48,7 @@ str_help_inv> dc "Example: i 0 0 - Invert the status of the cell at coordinates 
 str_help_play> dc "Example: play - Start the game.\r\n\r\n\0"
 str_help_pause> dc "Example: pause - Pause the game.\r\n\r\n\0"
 str_help_step> dc "Example: step - Perform one iteration of the game.\r\n\r\n\0"
-str_help_rules> dc "rules S<digits>B<digits> - Set custom rules for the game. Example: rules S23B3\r\n\r\n\0"
+str_help_rules> dc "Example: rules S23B3 - Set rules S23B3 for the game. No arguments - print current rules.\r\n\r\n\0"
 str_help_su> dc "Example: su - Speed up the game.\r\n\r\n\0"
 str_help_sd> dc "Example: sd - Slow down the game.\r\n\r\n\0"
 str_help_ss> dc "Example: ss 0 - Set game speed to value 0.\r\n\r\n\0"
