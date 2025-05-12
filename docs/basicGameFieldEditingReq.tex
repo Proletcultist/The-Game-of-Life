@@ -1,0 +1,15 @@
+\chapter*{Basic game field editing}
+\addcontentsline{toc}{chapter}{Basic game field editing}
+
+In order to modify current game field you can use following commands:
+
+\begin{itemize}
+	\item \textsf{s1 $x$ $y$} - set cell $(x, y)$ to alive status
+	\item \textsf{s0 $x$ $y$} - set cell $(x, y)$ to dead status
+	\item \textsf{i $x$ $y$} - invert status of $(x, y)$ cell	
+	\item \textsf{S1 $x_{1}$ $y_{1}$ $x_{2}$ $y_{2}$} -  Sets all cells in rectangle with upper left corner ($x_{1}$, $y_{1}$) and lower right corner ($x_{2}$, $y_{2}$) to alive status
+	\item \textsf{S0 $x_{1}$ $y_{1}$ $x_{2}$ $y_{2}$} -  Sets all cells in rectangle with upper left corner ($x_{1}$, $y_{1}$) and lower right corner ($x_{2}$, $y_{2}$) to dead status
+	\item \textsf{clr} - clear game field.
+\end{itemize}
+
+These commands provide easy-to-use way to modify one cell or mass-modify some rectangle of cells, but there is another powerful tool.

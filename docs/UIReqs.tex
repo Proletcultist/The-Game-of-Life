@@ -1,35 +1,11 @@
 \chapter*{UI requirements}
 \addcontentsline{toc}{chapter}{UI requirements}
 
-\section*{General design}
-\addcontentsline{toc}{section}{General design}
+For interaction with user - CLI is used. Product runs telnet server on port 7241, so in order to connect to it, you need to connect to this server (from same or another host) via telnet protocol. For example (linux telnet): \texttt{telnet localhost 7241}. On connection you will see "hello message" printed on your terminal.
 
-For interaction with user CLI is used. Always, when product is ready to process new user input, it prints shell prompt character - '$>$'.
+Always, when product is ready to process new user input, it prints shell prompt character - '$>$'.
 
-When single line of user input is processed, product let user know, if this input is processed successfuly or is there an error in this input and what type of error it is.
+When single line of user input is processed, product let user know, if this input is processed successfuly or is there an error in this input and what type of error it is. Also, if there is an error in using of some command from command list, there is an example, showing correct using of it.
 
 Also, there is a limit for size of single user input line. The limit is 30 characters, so, if user input some line longer, than that limit, product let him know about this and correctly process this situation, preventing buffer overflow and removing from UART input buffer "tail" of line, which exceeded limit.
 
-\section*{Commands list}
-\addcontentsline{toc}{section}{Commands list}
-
-Here is list of commands, which products CLI imlements:
-
-\begin{enumerate}
-	\item \textsf{h} - print help message
-	\item \textsf{s1 $x$ $y$} - set cell $(x, y)$ to alive status
-	\item \textsf{s0 $x$ $y$} - set cell $(x, y)$ to dead status
-	\item \textsf{i $x$ $y$} - invert status of $(x, y)$ cell
-	\item \textsf{play} - run game
-	\item \textsf{pause} - stop game
-	\item \textsf{step} - make one iteration of game
-	\item \textsf{rules S$<$digits sequence$>$B$<$digits sequence$>$} - set rules
-	\item \textsf{su} - speed up
-	\item \textsf{sd} - speed down
-	\item \textsf{ss $n$} - set speed to value $n$
-	\item \textsf{S1 $x_{1}$ $y_{1}$ $x_{2}$ $y_{2}$} -  Sets all cells in rectangle with upper left corner ($x_{1}$, $y_{1}$) and lower right corner ($x_{2}$, $y_{2}$) to alive status
-	\item \textsf{S0 $x_{1}$ $y_{1}$ $x_{2}$ $y_{2}$} -  Sets all cells in rectangle with upper left corner ($x_{1}$, $y_{1}$) and lower right corner ($x_{2}$, $y_{2}$) to dead status
-	\item \textsf{save $n$ $x_{1}$ $y_{1}$ $x_{2}$ $y_{2}$} - Save all cells in rectangle with upper left corner ($x_{1}$, $y_{1}$) and lower right corner ($x_{2}$, $y_{2}$) to slot number $n$.
-	\item \textsf{load $n$ $x$ $y$} - Copy all cells from slot $n$ to rectangle with upper left corner ($x_{1}$, $y_{1}$)
-	\item \textsf{clr} - clear game field.
-\end{enumerate}
