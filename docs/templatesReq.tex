@@ -1,0 +1,20 @@
+\chapter*{Templates system}
+\addcontentsline{toc}{chapter}{Templates system}
+
+In our product template is some part of game field state (or whole game field state) saved to "slot" in memory (there are 5 slots) for later loading it to any place on game field (only if template fit by size in this place). Also, once saved, slot can be rewrited with another template.
+
+In order to operate templates you can use following commands:
+
+\begin{itemize}
+	\item \textsf{save $n$ $x_{1}$ $y_{1}$ $x_{2}$ $y_{2}$} - Save all cells in rectangle with upper left corner ($x_{1}$, $y_{1}$) and lower right corner ($x_{2}$, $y_{2}$) to slot number $n$.
+	\item \textsf{load $n$ $x$ $y$} - Copy all cells from slot $n$ to rectangle with upper left corner ($x_{1}$, $y_{1}$) (note: this will be done only if template fits by size in specified place)
+	\item \textsf{getTemplates} - get all saved templates printed on external terminal.
+\end{itemize}
+
+There are three default templates, saved in first three slots (all of them work on standard rules: S23B3):
+
+\begin{enumerate}
+	\item Glider - small dynamic structure, running diagonlly.
+	\item Spaceship - medium-sized dynamic structure, running horizontally.
+	\item Blinkers generator - generates four blinkers placed in "cross" manner.
+\end{enumerate}

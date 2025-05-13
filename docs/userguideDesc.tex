@@ -1,0 +1,39 @@
+\chapter*{User guide}
+\addcontentsline{toc}{chapter}{User guide}
+
+\section*{Usage}
+\addcontentsline{toc}{section}{Usage}
+
+For usage you need:
+
+\begin{itemize}
+	\item Logisim
+	\item External terminal with ability to connect to UART via telnet protocol.
+	\item Product itself (all circuits and main programm image)
+\end{itemize}
+
+\begin{enumerate}
+	\item Open \texttt{main.circ}.
+	\item Load \texttt{main.img} into RAM chip.
+	\item Turn on ticks.
+	\item Connect to 7241 port of localhost via telnet:
+		\begin{itemize}
+			\item \textbf{Linux} just use \texttt{telnet localhost 7241} command.
+			\item \textbf{Windows} use PuTTY, but turn negotiations mode to "passive" (in telnet settings).
+		\end{itemize}
+	\item You will see hello message, type "h" to see list of commands. Enjoy!
+\end{enumerate}
+
+\section*{Building}
+\addcontentsline{toc}{section}{Building}
+
+For building purposes you need:
+
+\begin{itemize}
+	\item \href{https://github.com/Proletcultist/cdm-devkit-macro-improvements}{This} fork of CdM-devkit
+	\item Some make implementation (such as GNU make)
+\end{itemize}
+
+You can build all with \texttt{make all}. Also, you can build only tests with \texttt{make tests} or only main programm with \texttt{make main}. To add new test just add any .asm file you want to src/Tests directory (your test should provide some implementation for main function).
+
+For debugging purposes use \texttt{make $<$test name$>.debug$}. You should provide name of test from src/Tests directory (without extension .asm). As a result, you will have .img in bin/Tests and debug info file in debug/

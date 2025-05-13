@@ -1,7 +1,17 @@
 \chapter*{Introduction}
 \addcontentsline{toc}{chapter}{Introduction}
 
-\section*{Purpose}
-\addcontentsline{toc}{section}{Purpose}
+The purpose of this project is to create hardware-software complex for running cellular automaton - state machine, which state consists of:
 
-The purpose of this project is to develop software-hardware complex based on CdM-16 processor for running Conway's Game of Life cellular automaton with customizable rules set, game flow controlling and game field editor, providing wide range of editing tools.
+\begin{itemize}
+	\item 32x32 game field consist of cells, every cell can be alive or dead. Every cell has 8 neighbours around it.
+	\item \textbf{Born} - set of integers from 0 to 8, specifying, with what amounts of alive neighbours cell will become alive.
+	\item \textbf{Surv} - set of integers from 0 to 8, specifying, with what amounts of alive neighbours cell will survive.
+	\item \textbf{Mode} - \textbf{Bounds} mode (all cells around field considired as dead) or \textbf{Toroidal} mode (last row considered as row above first and vise versa, same for first and last column).
+\end{itemize}
+
+Mapping current state to new done based on described rules. Every iteration of the simulation - changing current state to calculated new state.
+
+Also, there is one setting for simulating game - \textbf{speed} - integer from 0 to 3, representing speed of game simulation. 0 stays for fastest speed (set as default) and 3 stays for slowest speed.
+
+User has wide range of tools for editing whole state of game, they will be described below.
